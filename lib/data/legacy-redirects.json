@@ -1,0 +1,22 @@
+{
+  "_comment": "Old Wix URLs → new pages. Static hosting (GitHub Pages) can't send HTTP redirects, so scripts/postbuild.mjs writes a tiny redirect page for each (meta refresh + location.replace, canonical to the target, noindex). /baraboo and /copy-of-berlin are deliberately NOT here: they fall through to the 404 page.",
+  "redirects": {
+    "/princeton": "/locations/princeton/",
+    "/princetonphotos": "/locations/princeton/#gallery",
+    "/berlin": "/locations/berlin/",
+    "/berlinphotos": "/locations/berlin/#gallery",
+    "/wautoma": "/locations/wautoma/",
+    "/wautomaphotos": "/locations/wautoma/#gallery",
+    "/omro": "/locations/omro/",
+    "/omrophotos": "/locations/omro/#gallery",
+    "/rosendale": "/locations/rosendale/",
+    "/rosendalephotos": "/locations/rosendale/#gallery",
+    "/photos": "/gallery/",
+    "/faqs": "/faq/",
+    "/sppt": "/personal-training/",
+    "/renew": "/members/",
+    "/repair": "/equipment-repair/",
+    "/terms-conditions": "/terms/",
+    "/privacy-policy": "/privacy/"
+  }
+}

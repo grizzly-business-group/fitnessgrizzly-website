@@ -1,0 +1,59 @@
+# Builds the static site and publishes it to GitHub Pages.
+#
+# One-time setup (repo Settings):
+#   • Settings → Pages → Build and deployment → Source: "GitHub Actions".
+#   • Settings → Secrets and variables → Actions → Variables:
+#       BASE_PATH      "/<repo-name>" while previewing on <user>.github.io/<repo-name>/ ; DELETE it (or leave
+#                      empty) once the custom domain www.fitnessgrizzly.com is set in Settings → Pages.
+#       SITE_INDEXING  leave unset (= noindex everywhere) until the authorized launch; then set to "true".
+#   Changing either variable needs a new run (Actions → Deploy to GitHub Pages → Run workflow).
+#
+# The custom domain is set in Settings → Pages → Custom domain (public/CNAME documents it; Actions-based
+# deployments ignore the file). DNS stays with the developer at launch — nothing here touches DNS.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - name: Build static site (next build + postbuild)
+        run: npm run build
+        env:
+          SITE_INDEXING: ${{ vars.SITE_INDEXING }}
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.BASE_PATH }}
+          NEXT_TELEMETRY_DISABLED: 1
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

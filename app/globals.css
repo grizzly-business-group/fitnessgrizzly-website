@@ -1,0 +1,414 @@
+@import "tailwindcss";
+
+/* ============================================================
+   GRIZZLY FITNESS — design tokens (from Phase 2 /Design Tokens)
+   ============================================================ */
+@theme {
+  --color-iron: #0e0d0b;
+  --color-charcoal: #1c1a17;
+  --color-charcoal-2: #2a2723;
+  --color-charcoal-3: #3a3631;
+  --color-bone: #ede6d8;
+  --color-bone-2: #b9b0a1;
+  --color-steel: #8b8680;
+  --color-lamp: #d9a35b;
+  --color-lamp-hover: #e8b873;
+  --color-lamp-deep: #7e5326;
+  --color-paper: #ede6d8;
+  --color-paper-2: #e2d9c8;
+  --color-ink: #1c1a17;
+  --color-ink-2: #4a453e;
+  /* Location colours = the colours on each gym's Facebook logo and key fobs.
+     loc-*      : the true brand colour — for solid fills (fob dots, bars, washes, selected states)
+     loc-*-tint : same hue lifted to ≥4.5:1 on iron — for small text and thin marks on dark */
+  --color-loc-princeton: #1e3a80;  --color-loc-princeton-tint: #6a8fe8;   /* royal blue */
+  --color-loc-berlin: #1f4a2b;     --color-loc-berlin-tint: #4da866;      /* forest green */
+  --color-loc-wautoma: #c8472b;    --color-loc-wautoma-tint: #e8673f;     /* orange */
+  --color-loc-omro: #4a1420;       --color-loc-omro-tint: #c9607f;        /* maroon */
+  --color-loc-rosendale: #9e2a2a;  --color-loc-rosendale-tint: #e25a52;   /* red */
+  --color-ok: #6fa26b;
+  --color-err: #e0644f;
+
+  --font-display: var(--font-big-shoulders), "Oswald", Impact, sans-serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-DEFAULT: 2px;
+  --ease-out-grizzly: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout-grizzly: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+:root {
+  --line: rgba(237, 230, 216, 0.14);
+  --line-strong: rgba(237, 230, 216, 0.32);
+  --lamp-glow: rgba(217, 163, 91, 0.22);
+  --margin: 20px;
+  --header-h: 68px;
+}
+@media (min-width: 768px) { :root { --margin: 40px; } }
+@media (min-width: 1024px) { :root { --header-h: 84px; } }
+@media (min-width: 1280px) { :root { --margin: 64px; } }
+
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: auto; }
+body {
+  background: var(--color-iron);
+  color: var(--color-bone);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+@media (min-width: 768px) { body { font-size: 18px; } }
+::selection { background: var(--color-lamp); color: var(--color-iron); }
+
+/* ---------- utilities ---------- */
+/* Hero type halo: a tight dark edge (counts as the letters' border for contrast) so text holds over the lamp glow */
+.hero-halo { text-shadow: 0 0 1px rgba(14,13,11,.95), 0 0 3px rgba(14,13,11,.8), 0 2px 28px rgba(14,13,11,.55); }
+.grain {
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+}
+@keyframes scroll-cue { 0% { transform: translateY(-100%); } 100% { transform: translateY(300%); } }
+.scroll-cue { animation: scroll-cue 1.8s var(--ease-inout-grizzly) infinite; }
+/* Keep anchor targets and keyboard focus clear of the fixed header and the phone action bar (WCAG 2.4.11). */
+html { scroll-padding-top: calc(var(--header-h) + 8px); }
+@media (max-width: 1023.98px) { html { scroll-padding-bottom: 80px; } }
+html[data-menu-open] [data-mobile-bar] { display: none; }
+
+/* ---------- S3 story ----------
+   Default = stacked chapters (mobile / reduced motion / no JS).
+   html[data-motion="full"] = pinned stage with overlaid chapters. */
+.story-chapter { display: grid; }
+.ch-media .beam { background: radial-gradient(70% 70% at 55% 55%, rgba(14,13,11,0) 0%, rgba(14,13,11,.45) 65%, rgba(14,13,11,.92) 100%); }
+.story-progress { display: none; }
+@media (min-width: 1024px) {
+  .story-chapter { grid-template-columns: 5fr 7fr; min-height: 80vh; border-top: 1px solid var(--line); }
+  .ch-text { display: flex; flex-direction: column; justify-content: center; padding-block: 96px; border-right: 1px solid var(--line); }
+  .ch-media { min-height: 80vh; }
+}
+@media (min-width: 1024px) {
+  html[data-motion="full"] .story-stage {
+    display: grid; grid-template-columns: 5fr 7fr; grid-template-rows: 1fr auto; height: 100vh;
+    grid-template-areas: "text media" "progress media";
+  }
+  html[data-motion="full"] .story-chapter { display: contents; }
+  html[data-motion="full"] .ch-text { grid-area: text; padding-top: calc(var(--header-h) + 48px); padding-bottom: 24px; justify-content: flex-start; }
+  html[data-motion="full"] .ch-media { grid-area: media; min-height: 0; }
+  html[data-motion="full"] .story-progress { display: block; grid-area: progress; padding-bottom: 56px; border-right: 1px solid var(--line); }
+  /* Opacity only — chapters stay readable by screen readers and reachable by keyboard (Milestone E). */
+  html[data-motion="full"] [data-chapter]:not([data-chapter="0"]) .ch-text { opacity: 0; }
+  html[data-motion="full"] [data-chapter]:not([data-current]) .ch-text { pointer-events: none; }
+  html[data-motion="full"] [data-chapter]:not([data-chapter="0"]) .ch-media { opacity: 0; }
+}
+@media (min-width: 1024px) and (max-height: 880px) {
+  /* Short laptop screens: keep all four chapter links inside the pinned frame */
+  html[data-motion="full"] .ch-text { padding-top: calc(var(--header-h) + 24px); }
+  html[data-motion="full"] .ch-text h2 { font-size: clamp(40px, 7.2vh, 72px); margin-top: 14px; }
+  html[data-motion="full"] .ch-text p { margin-top: 16px; font-size: 16px; }
+  html[data-motion="full"] .ch-text a { margin-top: 20px; }
+  html[data-motion="full"] .story-progress { padding-bottom: 28px; }
+  html[data-motion="full"] .story-progress a { padding-block: 9px; font-size: 19px; }
+}
+.story-progress a { color: var(--color-steel); transition: color .25s; } /* steel on iron ≈ 5.4:1 (was charcoal-3, 1.6:1 — failed WCAG) */
+.story-progress a[aria-current="step"] { color: var(--color-bone); }
+.story-progress a[aria-current="step"] i { color: var(--color-lamp); }
+.story-progress a:hover { color: var(--color-bone-2); }
+
+/* ---------- S4 five lights ---------- */
+.lights { display: grid; gap: 2px; }
+.gym { position: relative; overflow: hidden; background: var(--color-charcoal); min-height: 560px; display: flex; flex-direction: column; justify-content: flex-end; outline: none; }
+.gym-photo img { filter: contrast(1.1) saturate(.9) brightness(.82); transition: filter .7s var(--ease-out-grizzly), transform 1.2s var(--ease-out-grizzly); }
+.gym-shade { background: linear-gradient(180deg, rgba(14,13,11,.05) 25%, rgba(14,13,11,.94) 100%); }
+.gym-bar { background: var(--brand); box-shadow: inset 0 -1px 0 var(--tint); }
+/* Mobile cards: the text block covers most of the card, so the colour wash runs high and strong. */
+.gym-wash { background: linear-gradient(0deg, color-mix(in srgb, var(--brand) 94%, transparent) 0%, color-mix(in srgb, var(--brand) 86%, transparent) 55%, color-mix(in srgb, var(--brand) 30%, transparent) 80%, transparent 100%); }
+/* Text on the colour wash: bone for everything so it holds up on orange and red too. */
+.gym-info .gym-eyebrow { color: var(--color-bone); opacity: .9; }
+.gym-info dt { color: #d6cebf; } /* solid (not alpha) so contrast is fixed on every wash */
+.gym-info dd { color: var(--color-bone); }
+@media (min-width: 1024px) {
+  .gym-wash { background: linear-gradient(0deg, color-mix(in srgb, var(--brand) 80%, transparent) 0%, color-mix(in srgb, var(--brand) 38%, transparent) 38%, transparent 70%); }
+  .gym-info .gym-eyebrow { color: color-mix(in srgb, var(--tint) 62%, #fff); opacity: 1; } /* lifted tint: ≥4.5:1 over bright photos */
+}
+/* Phone / tablet cards (< 1024px): photo on top, details on a solid panel in a deeper shade of the
+   gym's fob colour — fixed, measurable contrast on every gym (Milestone E: text over photos failed). */
+@media (max-width: 1023.98px) {
+  .gym { justify-content: flex-start; min-height: 0; }
+  .gym-photo { position: relative !important; inset: auto !important; height: clamp(200px, 56vw, 320px); }
+  .gym-shade { display: none; }
+  .gym-wash { top: clamp(200px, 56vw, 320px) !important; background: color-mix(in srgb, var(--brand) 72%, #0e0d0b); }
+  .gym-wash::before { content: ""; position: absolute; inset: -56px 0 auto 0; height: 56px; background: linear-gradient(0deg, color-mix(in srgb, var(--brand) 72%, #0e0d0b), transparent); }
+  .gym-info { z-index: 1; padding-top: 24px; }
+  .gym-info .gym-eyebrow { opacity: 1; }
+}
+.gym-select { display: none; }
+.gym-info { position: relative; padding: 28px var(--margin) 32px; }
+@media (min-width: 1024px) {
+  .lights { display: flex; height: min(820px, calc(100vh - 40px)); min-height: 620px; }
+  .gym { flex: 1 1 0; min-height: 0; transition: flex-grow .8s var(--ease-inout-grizzly); }
+  .gym-photo img { filter: grayscale(.65) contrast(1.05) brightness(.36); }
+  /* Deeper shade behind the lit gym's details: keeps text ≥4.5:1 over bright ceilings (Milestone E) */
+  .gym-shade { opacity: 0; transition: opacity .6s; background: linear-gradient(180deg, rgba(14,13,11,.05) 10%, rgba(14,13,11,.62) 42%, rgba(14,13,11,.9) 62%, rgba(14,13,11,.96) 100%); }
+  .gym-bar { height: 6px; }
+  .gym-wash { opacity: 0; transition: opacity .6s; }
+  .gym-select:hover .gym-vname { color: var(--tint); }
+  .gym-select { display: block; position: absolute; inset: 0; z-index: 2; cursor: pointer; background: transparent; }
+  html[data-motion="full"] .gym[data-active="true"] .gym-select { visibility: hidden; }
+  html:not([data-motion="full"]) .gym[data-active="true"] .gym-select,
+  html:not([data-motion="full"]) .gym:hover .gym-select,
+  html:not([data-motion="full"]) .gym:focus-within .gym-select { pointer-events: none; }
+  .gym-vname { display: block; position: absolute; left: 50%; bottom: 56px; transform: translateX(-50%) rotate(180deg); writing-mode: vertical-rl; font-size: clamp(44px, 4.4vw, 68px); line-height: 1; color: var(--color-bone-2); transition: opacity .4s, color .25s; white-space: nowrap; }
+  /* Unlit gyms' details: opacity only, never visibility:hidden — all five stay readable by screen
+     readers and reachable by Tab; focusing one lights that gym (HomeMotion / :focus-within). */
+  .gym-info { position: absolute; inset: auto 44px 44px 44px; padding: 0; opacity: 0; pointer-events: none; transform: translateY(16px); transition: opacity .45s .15s, transform .6s .15s var(--ease-out-grizzly); min-width: 520px; }
+  .gym[data-active="true"] { flex-grow: 3.4; }
+  .gym[data-active="true"] .gym-photo img { filter: contrast(1.1) saturate(.9) brightness(.86); transform: scale(1.02); }
+  .gym[data-active="true"] .gym-shade { opacity: 1; }
+  .gym[data-active="true"] .gym-wash { opacity: 1; }
+  .gym[data-active="true"] .gym-vname { opacity: 0; }
+  .gym[data-active="true"] .gym-info { opacity: 1; pointer-events: auto; transform: none; transition-delay: .25s, .25s; }
+  .gym:focus-within .gym-info { transition-delay: 0s, 0s; transition-duration: .15s, .15s; }
+  /* No-JS / lite behaviour: hover or keyboard focus lights a column.
+     In full motion mode scroll drives the light (HomeMotion), so hover must not override it. */
+  html:not([data-motion="full"]) .lights:has(.gym:hover, .gym:focus-within) .gym[data-active="true"]:not(:hover):not(:focus-within) { flex-grow: 1; }
+  html:not([data-motion="full"]) .lights:has(.gym:hover, .gym:focus-within) .gym[data-active="true"]:not(:hover):not(:focus-within) .gym-info { opacity: 0; pointer-events: none; }
+  html:not([data-motion="full"]) .lights:has(.gym:hover, .gym:focus-within) .gym[data-active="true"]:not(:hover):not(:focus-within) .gym-vname { opacity: 1; }
+  html:not([data-motion="full"]) .lights:has(.gym:hover, .gym:focus-within) .gym[data-active="true"]:not(:hover):not(:focus-within) .gym-photo img { filter: grayscale(.65) contrast(1.05) brightness(.36); transform: none; }
+  html:not([data-motion="full"]) .gym:hover, html:not([data-motion="full"]) .gym:focus-within { flex-grow: 3.4; }
+  html:not([data-motion="full"]) .gym:hover .gym-photo img, html:not([data-motion="full"]) .gym:focus-within .gym-photo img { filter: contrast(1.1) saturate(.9) brightness(.86); }
+  html:not([data-motion="full"]) .gym:hover .gym-shade, html:not([data-motion="full"]) .gym:focus-within .gym-shade { opacity: 1; }
+  html:not([data-motion="full"]) .gym:hover .gym-wash, html:not([data-motion="full"]) .gym:focus-within .gym-wash { opacity: 1; }
+  html:not([data-motion="full"]) .lights:has(.gym:hover, .gym:focus-within) .gym[data-active="true"]:not(:hover):not(:focus-within) .gym-wash { opacity: 0; }
+  html:not([data-motion="full"]) .gym:hover .gym-vname, html:not([data-motion="full"]) .gym:focus-within .gym-vname { opacity: 0; }
+  html:not([data-motion="full"]) .gym:hover .gym-info { opacity: 1; pointer-events: auto; transform: none; transition-delay: .25s, .25s; }
+  html:not([data-motion="full"]) .gym:focus-within .gym-info { opacity: 1; pointer-events: auto; transform: none; transition-delay: 0s, 0s; transition-duration: .15s, .15s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .15s !important; }
+  .scroll-cue { animation: none; }
+}
+
+/* Hero photo framing. Narrower than the photo's 4:3 → crop horizontally but keep the table lamp in frame. */
+.hero-img { object-position: 50% 45%; }
+.lit { -webkit-mask-position: 50% 45%; mask-position: 50% 45%; }
+@media (max-aspect-ratio: 4/3) {
+  .hero-img { object-position: 6% 50%; }
+  .lit { -webkit-mask-position: 6% 50%; mask-position: 6% 50%; }
+}
+
+/* ---------- M1 · Lights On intro (pure CSS; gated by html[data-intro="play"]) ----------
+   Each .lit layer is the hero photo masked to one light source. Masks are drawn in the photo's own
+   2400×1800 coordinates; mask-size: cover + the same position as object-position keeps them aligned
+   with the photo at every screen size.
+   0.0–0.4  black
+   0.4–1.2  table lamp sputters like an incandescent bulb, catches, warms up
+   1.35–1.8 pendants click on front → back (front pair, mid pair, back-room strip)
+   1.8–2.5  the rest of the room comes up; light layers relax into the photo by 2.9
+   2.3–3.6  headline rises, then copy, buttons, town bar and header
+   Any wheel/touch/key/pointer input ends it instantly (inline script in app/layout.tsx). */
+.hero-lights { display: none; }
+html[data-intro="play"] .hero-lights { display: block; }
+.lit { opacity: 0; -webkit-mask-size: cover; mask-size: cover; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+.lit-glow { background: rgba(232, 184, 115, .22); mix-blend-mode: screen; }
+.lit-lamp { -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.2' stop-color='%23fff'/><stop offset='.42' stop-color='%23fff' stop-opacity='.55'/><stop offset='.7' stop-color='%23fff' stop-opacity='.16'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='335' cy='905' rx='560' ry='560' fill='url(%23g)'/><ellipse cx='568' cy='925' rx='190' ry='190' fill='url(%23g)'/></svg>"); mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.2' stop-color='%23fff'/><stop offset='.42' stop-color='%23fff' stop-opacity='.55'/><stop offset='.7' stop-color='%23fff' stop-opacity='.16'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='335' cy='905' rx='560' ry='560' fill='url(%23g)'/><ellipse cx='568' cy='925' rx='190' ry='190' fill='url(%23g)'/></svg>"); }
+.lit-p1 { -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.1' stop-color='%23fff'/><stop offset='.3' stop-color='%23fff' stop-opacity='.5'/><stop offset='.6' stop-color='%23fff' stop-opacity='.12'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='1254' cy='455' rx='240' ry='300' fill='url(%23g)'/><ellipse cx='2316' cy='478' rx='240' ry='300' fill='url(%23g)'/></svg>"); mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.1' stop-color='%23fff'/><stop offset='.3' stop-color='%23fff' stop-opacity='.5'/><stop offset='.6' stop-color='%23fff' stop-opacity='.12'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='1254' cy='455' rx='240' ry='300' fill='url(%23g)'/><ellipse cx='2316' cy='478' rx='240' ry='300' fill='url(%23g)'/></svg>"); }
+.lit-p2 { -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.1' stop-color='%23fff'/><stop offset='.3' stop-color='%23fff' stop-opacity='.5'/><stop offset='.6' stop-color='%23fff' stop-opacity='.12'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='1161' cy='628' rx='150' ry='180' fill='url(%23g)'/><ellipse cx='1803' cy='642' rx='160' ry='190' fill='url(%23g)'/></svg>"); mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.1' stop-color='%23fff'/><stop offset='.3' stop-color='%23fff' stop-opacity='.5'/><stop offset='.6' stop-color='%23fff' stop-opacity='.12'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='1161' cy='628' rx='150' ry='180' fill='url(%23g)'/><ellipse cx='1803' cy='642' rx='160' ry='190' fill='url(%23g)'/></svg>"); }
+.lit-back { -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.1' stop-color='%23fff'/><stop offset='.3' stop-color='%23fff' stop-opacity='.5'/><stop offset='.6' stop-color='%23fff' stop-opacity='.12'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='1230' cy='780' rx='380' ry='95' fill='url(%23g)'/><ellipse cx='1230' cy='850' rx='480' ry='140' fill='url(%23g)'/></svg>"); mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2400' height='1800' viewBox='0 0 2400 1800'><defs><radialGradient id='g'><stop offset='0' stop-color='%23fff'/><stop offset='.1' stop-color='%23fff'/><stop offset='.3' stop-color='%23fff' stop-opacity='.5'/><stop offset='.6' stop-color='%23fff' stop-opacity='.12'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></radialGradient></defs><ellipse cx='1230' cy='780' rx='380' ry='95' fill='url(%23g)'/><ellipse cx='1230' cy='850' rx='480' ry='140' fill='url(%23g)'/></svg>"); }
+
+@keyframes gf-lamp {            /* 0.8s: sputter, catch, warm up */
+  0%   { opacity: 0;   animation-timing-function: steps(1, end); }
+  7%   { opacity: .8;  animation-timing-function: steps(1, end); }
+  13%  { opacity: 0;   animation-timing-function: steps(1, end); }
+  19%  { opacity: 1;   animation-timing-function: steps(1, end); }
+  26%  { opacity: .08; animation-timing-function: steps(1, end); }
+  42%  { opacity: 0;   animation-timing-function: steps(1, end); }
+  50%  { opacity: .45; animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
+  100% { opacity: 1; }
+}
+@keyframes gf-click {           /* 0.2s: a fluorescent-style click on */
+  0%   { opacity: 0;   animation-timing-function: steps(1, end); }
+  20%  { opacity: 1;   animation-timing-function: steps(1, end); }
+  45%  { opacity: .15; animation-timing-function: steps(1, end); }
+  70%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes gf-glow   { 0%, 60% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes gf-room   { from { opacity: 1; } to { opacity: 0; } }
+@keyframes gf-out    { from { opacity: 1; } to { opacity: 0; } }
+@keyframes gf-zoom   { from { transform: scale(1.06); } to { transform: scale(1); } }
+@keyframes gf-rise   { from { transform: translateY(110%); } to { transform: translateY(0); } }
+@keyframes gf-fade   { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes gf-appear { from { opacity: 0; } to { opacity: 1; } }
+
+html[data-intro="play"] [data-hero-photo] { animation: gf-zoom 3.8s cubic-bezier(.2, .7, .2, 1) both; }
+html[data-intro="play"] [data-hero-lights] { animation: gf-zoom 3.8s cubic-bezier(.2, .7, .2, 1) both, gf-out .5s 2.4s ease-in-out both; }
+html[data-intro="play"] .lit-lamp { animation: gf-lamp .8s .4s both; }
+html[data-intro="play"] .lit-p1   { animation: gf-click .2s 1.35s both; }
+html[data-intro="play"] .lit-p2   { animation: gf-click .2s 1.52s both; }
+html[data-intro="play"] .lit-back { animation: gf-click .2s 1.68s both; }
+html[data-intro="play"] .lit-glow { animation: gf-glow 2.6s both; }
+html[data-intro="play"] [data-hero-dark] { animation: gf-room .7s 1.8s cubic-bezier(.45, 0, .25, 1) both; }
+html[data-intro="play"] [data-hero-line] { animation: gf-rise 1s 2.3s cubic-bezier(.16, 1, .3, 1) both; }
+html[data-intro="play"] [data-hero-line-2] { animation-delay: 2.42s; }
+html[data-intro="play"] [data-hero-fade] { animation: gf-fade .7s var(--d, 2.7s) cubic-bezier(.16, 1, .3, 1) both; }
+html[data-intro="play"] [data-hero-cta] { animation: gf-fade .6s 2.8s cubic-bezier(.16, 1, .3, 1) both; }
+html[data-intro="play"] [data-intro-header] { animation: gf-appear .6s 2.95s ease-out both; }
+
+/* Narrow portrait screens (phones): every pendant light is cropped out of frame (photo positioned at 6%
+   to keep the table lamp in view), so the 0.5 s the sequence spends on them is invisible dead time.
+   Same sequence, minus that wait: room comes up and type arrives 0.5 s sooner (LCP, Milestone E).
+   Breakpoint derived from the crop: pendants leave the frame below an aspect ratio of about 0.6. */
+@media (max-aspect-ratio: 3/5) {
+  html[data-intro="play"] [data-hero-dark] { animation-delay: 1.3s; }
+  html[data-intro="play"] [data-hero-lights] { animation: gf-zoom 3.8s cubic-bezier(.2, .7, .2, 1) both, gf-out .5s 1.9s ease-in-out both; }
+  /* P-1 (owner-approved 19 Nov 2026): on phones the headline rises at 0.6 s instead of 1.8 s, while the
+     room is still coming up, so the largest paint lands earlier. Desktop timing is unchanged. */
+  html[data-intro="play"] [data-hero-line] { animation-delay: .6s; }
+  html[data-intro="play"] [data-hero-line-2] { animation-delay: .72s; }
+  /* P-1 continued: the eyebrow, lead, buttons and header follow the headline ~1 s earlier than before too, in the
+     same order, so the largest text block (the lead) isn't left waiting behind the room. */
+  html[data-intro="play"] [data-hero-fade] { animation-delay: calc(var(--d, 2.7s) - 1.5s); }
+  /* The lead paragraph is the largest text on a phone; Chrome only counts it as painted once a fade ends, so on
+     phones it is simply there from the first frame (no fade) and the headline rises over it at 0.6 s. */
+  html[data-intro="play"] [data-hero-lead] { animation: none; }
+  html[data-intro="play"] [data-hero-cta] { animation-delay: 1.3s; }
+  html[data-intro="play"] [data-intro-header] { animation-delay: 1.45s; }
+}
+
+/* ---------- M3 light-beam mask on chapter photos (motion mode only) ---------- */
+@media (min-width: 1024px) {
+  html[data-motion="full"] .ch-media {
+    --beam: 150%;
+    -webkit-mask-image: radial-gradient(circle at 58% 52%, #000 var(--beam), transparent calc(var(--beam) + 22%));
+    mask-image: radial-gradient(circle at 58% 52%, #000 var(--beam), transparent calc(var(--beam) + 22%));
+  }
+  html[data-motion="full"] .lights { height: 100vh; max-height: none; }
+}
+
+/* ---------- Phase 4 · location pages (light motion: entrance, reveals, parallax, lightbox) ---------- */
+@keyframes loc-in { from { opacity: .01; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.loc-in { animation: loc-in .8s cubic-bezier(.16, 1, .3, 1) both; }
+.loc-in-1 { animation-delay: .08s; }
+.loc-in-2 { animation-delay: .18s; }
+.loc-in-3 { animation-delay: .3s; }
+.loc-in-4 { animation-delay: .42s; }
+/* P-2 (owner-approved 19 Nov 2026): the hero photo and the lead paragraph appear at once (no entrance), so
+   the largest paint isn't held back; the eyebrow, title and buttons keep their short rise. */
+.loc-hero-photo { animation: none; }
+
+/* Below-fold reveals: classes are only added by JS (LocationMotion), so no-JS shows everything. */
+.loc-pre { opacity: 0; transform: translateY(24px); }
+.loc-pre.loc-shown { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1); }
+.loc-pre.loc-instant { transition: none; }
+[data-loc-parallax] { will-change: transform; }
+
+.loc-gallery { grid-auto-rows: 1fr; --cell: 4 / 3; }
+.loc-gallery[data-shape="portrait"] { --cell: 4 / 5; }
+.loc-gallery > li > button { aspect-ratio: var(--cell); }
+/* The 2×2 lead photo and double-width photos take the row height set by their single neighbours. */
+.loc-gallery > li[data-w~="b"] > button { aspect-ratio: auto; min-height: 100%; }
+@media (min-width: 768px) {
+  .loc-gallery > li > button { aspect-ratio: var(--cell); }
+  .loc-gallery > li[data-w~="m"] > button { aspect-ratio: auto; min-height: 100%; }
+}
+@media (min-width: 1024px) {
+  .loc-gallery > li > button { aspect-ratio: var(--cell); }
+  .loc-gallery > li[data-w~="l"] > button { aspect-ratio: auto; min-height: 100%; }
+}
+
+/* Photo grade per gym (main.loc-tone-*): one campaign, each gym's real colours kept honest. */
+.loc-hero-grade { filter: contrast(1.1) saturate(.9) brightness(.78) sepia(.08); }
+.loc-gal-img { filter: contrast(1.05) brightness(.9); }
+button:hover > .loc-gal-img, button:focus-visible > .loc-gal-img { filter: contrast(1.05) brightness(1); }
+.loc-tone-industrial .loc-hero-grade { filter: contrast(1.08) saturate(.95) brightness(.84); }
+.loc-tone-community .loc-hero-grade { filter: contrast(1.05) saturate(1) brightness(.96); }
+.loc-tone-mono .loc-hero-grade { filter: grayscale(1) contrast(1.22) brightness(.74); }
+.loc-tone-mono .loc-photo, .loc-tone-mono .loc-gal-img { filter: grayscale(.92) contrast(1.14) brightness(.9); }
+.loc-tone-mono button:hover > .loc-gal-img, .loc-tone-mono button:focus-visible > .loc-gal-img { filter: grayscale(.2) contrast(1.06) brightness(1); }
+.loc-tone-bright .loc-hero-grade { filter: contrast(1.04) saturate(1.02); }
+.loc-tone-bright .loc-gal-img { filter: none; }
+.loc-photo { transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.loc-archive { filter: sepia(.25) contrast(1.02) brightness(.92); }
+
+.loc-lightbox { background: rgb(10 10 10 / .96); }
+.loc-lightbox::backdrop { background: rgb(10 10 10 / .92); }
+.loc-lightbox[open] { display: block; animation: gf-appear .2s ease-out both; }
+
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .28s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .loc-in, .loc-hero-photo, .loc-lightbox[open] { animation: none; }
+  .loc-pre { opacity: 1; transform: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+html[data-motion="reduced"] .loc-in, html[data-motion="reduced"] .loc-hero-photo { animation: none; }
+
+/* ───────────── About · "Small towns. Big dreamers." (Phase 5) ─────────────
+   Reveal states hang off the shared LocationMotion classes: an element that starts below the fold gets
+   .loc-pre, then .loc-shown when it enters. Defaults are the FINAL state, so no-JS, above-the-fold and
+   reduced-motion readers always see everything. */
+.about-hero .about-year {
+  right: -2vw; bottom: -6vw; font-size: clamp(220px, 34vw, 560px); letter-spacing: -.02em;
+  color: transparent; -webkit-text-stroke: 1px rgb(237 230 216 / .13);
+}
+.about-hero .about-lamp {
+  right: 6%; top: 8%; width: min(70vw, 900px); aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(217 163 91 / .26), rgb(217 163 91 / .08) 45%, transparent 72%);
+  animation: about-lamp-on 2.2s cubic-bezier(.2, .7, .2, 1) .2s both;
+}
+@keyframes about-lamp-on { 0% { opacity: 0; } 18% { opacity: .55; } 26% { opacity: .2; } 100% { opacity: 1; } }
+
+
+/* Source · Transport · Repair · Install · Maintain — staggered */
+.loc-pre .about-verbs > li { opacity: 0; transform: translateY(14px); }
+.loc-pre.loc-shown .about-verbs > li, .about-verbs.loc-pre.loc-shown > li { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s cubic-bezier(.16, 1, .3, 1); transition-delay: calc(var(--i) * 90ms); }
+.about-verbs.loc-pre > li { opacity: 0; transform: translateY(14px); }
+
+/* Image reveal (wipe up) for figures inside a revealing block */
+.loc-pre .about-reveal, figure.loc-pre .about-reveal { clip-path: inset(100% 0 0 0); }
+.loc-pre.loc-shown .about-reveal, figure.loc-pre.loc-shown .about-reveal { clip-path: inset(0); transition: clip-path 1s cubic-bezier(.16, 1, .3, 1) .1s; }
+
+/* Timeline: rail + scroll-progress fill + dots (left rail on phones, centre-left column on desktop) */
+.about-tl { --tl-p: 1; --rail-x: 11px; }
+@media (min-width: 768px) { .about-tl { --rail-x: 15px; } }
+@media (min-width: 1024px) { .about-tl { --rail-x: calc((100% + 48px) * 4 / 12 - 24px); } }
+.about-tl-rail, .about-tl-fill { position: absolute; left: var(--rail-x); top: 8px; bottom: 0; width: 2px; margin-left: -1px; }
+.about-tl-rail { background: rgb(237 230 216 / .14); }
+.about-tl-fill { background: var(--color-lamp); transform-origin: 0 0; transform: scaleY(var(--tl-p)); box-shadow: 0 0 14px var(--lamp-glow); }
+.about-dot {
+  position: absolute; left: var(--rail-x); top: 14px; width: 15px; height: 15px; margin-left: -7.5px; border-radius: 50%;
+  background: var(--color-iron); border: 2px solid rgb(237 230 216 / .35); transition: background-color .35s, border-color .35s, box-shadow .35s;
+}
+@media (min-width: 1024px) { .about-dot { top: 26px; } }
+.about-stage[data-passed] .about-dot { background: var(--color-lamp); border-color: var(--color-lamp); box-shadow: 0 0 0 5px rgb(217 163 91 / .16), 0 0 18px var(--lamp-glow); }
+.about-stage .about-when { transition: color .35s; }
+.about-stage time.about-when { color: rgb(237 230 216 / .45); }
+.about-stage[data-passed] time.about-when { color: var(--color-lamp); }
+.about-stage:not([data-passed]) { }
+
+/* Five-gym index: preview crossfade */
+.about-gym-preview { opacity: 0; transform: scale(1.04); transition: opacity .55s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+.about-gym-preview.is-on { opacity: 1; transform: none; }
+
+/* Closing line: the letters of BIG DREAMERS switch on one by one */
+.about-close .about-letter { color: var(--color-lamp); }
+.about-close.loc-pre .about-letter { color: rgb(237 230 216 / .14); }
+.about-close.loc-pre.loc-shown .about-letter { color: var(--color-lamp); transition: color .25s ease; transition-delay: calc(.35s + var(--i) * 70ms); }
+.about-close-lamp { background: radial-gradient(60% 55% at 50% 52%, rgb(217 163 91 / .14), transparent 70%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-hero .about-lamp { animation: none; }
+  .loc-pre .about-verbs > li, .about-verbs.loc-pre > li { transform: none; opacity: 1; }
+  .loc-pre .about-reveal, figure.loc-pre .about-reveal { clip-path: none; }
+  .about-close.loc-pre .about-letter { color: var(--color-lamp); }
+  .about-tl-fill { transform: none; }
+  .about-gym-preview { transition: none; }
+}
