@@ -7,6 +7,7 @@
  *   - Google tag / GA4 / GTM (+ Google Ads conversion endpoints, used only if an Ads ID is configured)
  *   - Meta Pixel
  *   - GoHighLevel / LeadConnector forms and calendars (link.apisystem.tech, *.leadconnectorhq.com, *.msgsndr.com)
+ *   - Google Forms, framed only (the membership cancellation form on /cancel)
  * Next's static export inlines its bootstrap scripts, so 'unsafe-inline' is required for scripts and styles.
  * A meta CSP can't set frame-ancestors / X-Frame-Options (header-only); Pages can't add those.
  */
@@ -21,7 +22,7 @@ export const csp = [
   `img-src 'self' data: blob: ${[...google, ...meta, ...ghl].join(" ")}`,
   "font-src 'self' data:",
   `connect-src 'self' ${[...google, ...meta, ...ghl].join(" ")}`,
-  `frame-src ${["https://www.googletagmanager.com", "https://*.doubleclick.net", "https://www.facebook.com", ...ghl].join(" ")}`,
+  `frame-src ${["https://www.googletagmanager.com", "https://*.doubleclick.net", "https://www.facebook.com", "https://docs.google.com", ...ghl].join(" ")}`,
   "media-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",

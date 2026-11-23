@@ -176,7 +176,7 @@ export const privacy: LegalDoc = {
         { ul: [
           "GymMaster — memberships, the member portal and app, and payments",
           "GoHighLevel / LeadConnector — our contact database, website forms, booking calendar, email and text messaging",
-          "Google — Google Analytics 4, and Google Forms (used for equipment-repair and podcast-guest forms)",
+          "Google — Google Analytics 4, and Google Forms (used for equipment-repair, podcast-guest and membership-cancellation forms)",
           "Meta — Meta Pixel advertising measurement",
           "GitHub — website hosting (GitHub Pages), which processes technical information such as IP addresses",
         ] },

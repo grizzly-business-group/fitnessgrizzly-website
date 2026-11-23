@@ -201,6 +201,11 @@ export default function MembersPage() {
           Not a member yet? <Ext href={to(links.join.href)} className="font-semibold text-bone underline decoration-lamp underline-offset-4 hover:text-lamp">Join online</Ext> or{" "}
           <a href={to("/memberships")} className="font-semibold text-bone underline decoration-lamp underline-offset-4 hover:text-lamp">see membership options</a>.
         </p>
+        {/* Small, deliberately quiet route to the hidden cancellation page (owner, 23 Nov 2026). */}
+        <p className="mt-4 text-[13px] text-steel" data-loc-reveal>
+          Need to cancel your membership?{" "}
+          <a href={to("/cancel")} className="font-semibold text-bone-2 underline underline-offset-4 hover:text-bone">Cancel here</a>
+        </p>
       </Section>
 
       <CtaBand title="1% better" accent="than yesterday." photo={pRacks} secondary={{ label: "Find your gym", href: "/locations" }} />

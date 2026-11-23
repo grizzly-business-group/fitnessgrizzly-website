@@ -40,7 +40,7 @@ export const berlin: LocationPage = {
   seo: {
     title: "Grizzly Fitness Berlin, WI | 24/7 Warehouse Gym on Industrial Park Rd",
     description:
-      "Grizzly Fitness Berlin: a 24/7 key-fob warehouse gym with a mezzanine cardio section, a heavy lifting section below, a Life Fitness circuit, Hammer Strength, a turf area and tanning. Staffed Mon/Wed/Fri 8 AM–3 PM.",
+      "Grizzly Fitness Berlin: a 24/7 key-fob warehouse gym with a mezzanine cardio section, a heavy lifting section below, a Life Fitness circuit, Hammer Strength, a turf area and tanning. Staffed Mon & Wed 8 AM–7 PM, Fri 8 AM–2 PM.",
   },
   geo: { lat: 43.9595668, lng: -88.9304424 },
   tone: "industrial",

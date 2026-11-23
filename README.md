@@ -97,7 +97,7 @@ One-time repo setup (see START HERE §4 for the full order):
 
 | Kind | Routes (all with a trailing slash) |
 |---|---|
-| Pages | `/`, `/about/`, `/locations/`, `/training/`, `/personal-training/`, `/classes/`, `/memberships/`, `/members/`, `/faq/`, `/gallery/`, `/podcast/`, `/careers/`, `/equipment-repair/` (noindex), `/contact/`, `/terms/`, `/privacy/`, `/accessibility/`, `/thank-you/` (noindex, form confirmation) |
+| Pages | `/`, `/about/`, `/locations/`, `/training/`, `/personal-training/`, `/classes/`, `/memberships/`, `/members/`, `/faq/`, `/gallery/`, `/podcast/`, `/careers/`, `/equipment-repair/` (noindex), `/contact/`, `/terms/`, `/privacy/`, `/accessibility/`, `/thank-you/` (noindex, form confirmation), `/cancel/` (hidden: noindex/nofollow, not in menus or the sitemap; embeds the cancellation Google Form; linked only from a small line at the bottom of /members) |
 | Gym pages | `/locations/princeton/`, `/berlin/`, `/wautoma/`, `/omro/`, `/rosendale/` |
 | Files | `/robots.txt`, `/sitemap.xml` (21 URLs), `/icon.png`, `/apple-icon.png`, `/favicon.ico`, `/404.html` |
 | Errors | Anything else, including `/baraboo`, `/copy-of-berlin` and `/locations/<other>/` → branded 404 (status 404) |

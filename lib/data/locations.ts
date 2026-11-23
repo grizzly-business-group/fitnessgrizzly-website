@@ -52,8 +52,9 @@ export const locations: Location[] = [
     color: "var(--color-loc-berlin)",
     tint: "var(--color-loc-berlin-tint)",
     address: { street: "480 N Industrial Park Rd", city: "Berlin, WI", zip: "54923", verified: true },
-    staffed: { label: "Mon / Wed / Fri · 8 AM–3 PM", lines: ["Mon / Wed / Fri", "8:00 AM – 3:00 PM"], verified: true },
-    staffedHours: [{ days: ["Monday", "Wednesday", "Friday"], opens: "08:00", closes: "15:00" }],
+    // Updated by the owner 23 Nov 2026 (was Mon/Wed/Fri 8–3). Not staffed Tue, Thu, Sat, Sun.
+    staffed: { label: "Mon & Wed 8–7 · Fri 8–2", lines: ["Mon & Wed 8 AM – 7 PM", "Fri 8 AM – 2 PM"], verified: true },
+    staffedHours: [{ days: ["Monday", "Wednesday"], opens: "08:00", closes: "19:00" }, { days: ["Friday"], opens: "08:00", closes: "14:00" }],
     gymmasterClubId: 6,
     mapsUrl: "https://www.google.com/maps/place/Grizzly+Fitness+Berlin/@43.9616104,-89.2718115,11z/data=!4m10!1m2!2m1!1sGrizzly+Fitness!3m6!1s0x88015b34d9e0cc81:0x9550a0e9e32321ba!8m2!3d43.9595668!4d-88.9304424!15sCg9Hcml6emx5IEZpdG5lc3OSAQ5maXRuZXNzX2NlbnRlcqoBXAoNL2cvMTFjNGJwNmZfOBABKhMiD2dyaXp6bHkgZml0bmVzcygAMh8QASIboi3QM0hiQaAq3KZ3ZlOREfrWfOQGXRcgCNBeMhMQAiIPZ3JpenpseSBmaXRuZXNz4AEA!16s%2Fg%2F11r9gw8bwf!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D",
     showcase: { src: berlinTurf, alt: "A green turf lane beneath a row of international flags at Grizzly Fitness Berlin", position: "50% 45%" },

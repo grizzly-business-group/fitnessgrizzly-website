@@ -41,6 +41,9 @@ export const links = {
   // Owner decision (Nov 2026): careers is email-only. The Google Form (which still lists Baraboo and Priority Fitness
   // roles) is not linked. Set formReady: true only if the form is edited and the owner wants it back.
   careers: { formReady: false, href: "https://docs.google.com/forms/d/e/1FAIpQLScD0Yk0wTnDXobBnGjLHwvZvSVtso0wizdjJ-hHXbKs_RIGug/viewform", label: "Careers", verified: true, external: true },
+  // Membership cancellation (owner, 23 Nov 2026). Embedded on the hidden /cancel page (noindex, not in the sitemap or
+  // menus; linked only from a small line on /members). Opened read-only 23 Nov 2026 — never submitted.
+  cancelForm: { href: "https://docs.google.com/forms/d/e/1FAIpQLSfZVsHHtXVWyNMQCMRX9m2RpaE4QBFTcB1j_GYSrW1mYWu3uw/viewform", label: "Cancellation form", verified: true, external: true },
   podcastGuest: { href: "https://docs.google.com/forms/d/e/1FAIpQLSdE42FXttAUFPwRsRrZQ0Lm7vA14bVtsA_j3twCHzD4aR1jLA/viewform", label: "Be a guest", verified: true, external: true },
   spotify: { href: "https://open.spotify.com/show/5E97tqguBNkMANWKAdtT10", label: "Spotify", verified: true, external: true },
   applePodcasts: { href: "https://podcasts.apple.com/us/podcast/the-grizzly-life-podcast/id1799753510", label: "Apple Podcasts", verified: true, external: true },
