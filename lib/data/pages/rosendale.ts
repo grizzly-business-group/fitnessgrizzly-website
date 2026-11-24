@@ -1,22 +1,26 @@
 import type { LocationPage } from "../location-pages";
 
-import rStorefront from "@/public/media/rosendale/rosendale-storefront-racks.jpg";
-import rRoom from "@/public/media/rosendale/rosendale-whole-room.jpg";
-import rSelect from "@/public/media/rosendale/rosendale-selectorized-line.jpg";
-import rPlateRacks from "@/public/media/rosendale/rosendale-plate-loaded-racks.jpg";
-import rCardioX from "@/public/media/rosendale/rosendale-cardio-x-wall.jpg";
-import rRacksBenches from "@/public/media/rosendale/rosendale-racks-benches.jpg";
 import rStretch from "@/public/media/rosendale/rosendale-stretch-room.jpg";
-import rDumbbells from "@/public/media/rosendale/rosendale-dumbbells-storefront.jpg";
+// Camera originals from the owner's Rosendale album (March 2024), edited for exposure, colour and sharpness only.
+import rPlatformStore from "@/public/media/rosendale/rosendale-2024-platform-storefront.jpg";
+import rWholeRoom from "@/public/media/rosendale/rosendale-2024-whole-room.jpg";
+import rSelectLine from "@/public/media/rosendale/rosendale-2024-selectorized-line.jpg";
+import rSelect1 from "@/public/media/rosendale/rosendale-2024-selectorized.jpg";
+import rTreadX from "@/public/media/rosendale/rosendale-2024-treadmills-x-wall.jpg";
+import rCardioRow from "@/public/media/rosendale/rosendale-2024-cardio-row.jpg";
+import rRower from "@/public/media/rosendale/rosendale-2024-rower-dumbbells.jpg";
+import rPlates from "@/public/media/rosendale/rosendale-2024-bumper-plates.jpg";
+import rBenches from "@/public/media/rosendale/rosendale-2024-benches-dumbbells.jpg";
+import rRacks24 from "@/public/media/rosendale/rosendale-2024-racks.jpg";
+import rDownRoom from "@/public/media/rosendale/rosendale-2024-down-the-room.jpg";
+import rDbWall from "@/public/media/rosendale/rosendale-2024-dumbbell-wall.jpg";
 
 /*
  * Rosendale — "The Neighborhood Gym". Sources: /rosendale (address only), /rosendalephotos (13 images),
  * homepage staffed hours ("by appointment").
  *
- * PHOTOS: every Rosendale image is a ~1890px screenshot, not a camera original (Phase 1). To swap in
- * originals later, run:  npm run photo -- <original.jpg> rosendale/rosendale-<name>
- * which auto-rotates, resizes and overwrites the file at the same path — this page (and every other
- * place the photo appears) picks it up with no code change. Then drop `source: "screenshot"` below.
+ * PHOTOS: Nov 2026 — the page now uses camera originals from the owner's album (March 2024). Only the
+ * stretch-room photo is still a ~1890px screenshot (no original in the album), marked `source: shot`.
  */
 
 const shot = "screenshot" as const;
@@ -35,12 +39,11 @@ export const rosendale: LocationPage = {
   hero: {
     variant: "storefront",
     photo: {
-      src: rStorefront,
-      asset: "f51fb04f",
-      alt: "Racks, benches and plate-loaded machines facing the glass storefront doors onto S. Main Street at Grizzly Fitness Rosendale, with blue and grey striped walls",
+      src: rPlatformStore,
+      asset: "IMG_8769",
+      alt: "A half rack beside a wooden lifting platform at Grizzly Fitness Rosendale, blue and grey striped walls and the glass storefront doors onto S. Main Street at the far end",
       caption: "Inside the storefront at 102 S. Main St.",
       position: "50% 55%",
-      source: shot,
     },
     eyebrow: "05 — The Neighborhood Gym",
     lead: "A bright storefront gym right on Main Street: selectorized machines, half racks, plate-loaded machines, dumbbells and cardio, open 24/7 with your key fob.",
@@ -55,8 +58,8 @@ export const rosendale: LocationPage = {
       "The room holds a line of selectorized machines with red seats, half racks, a plate-loaded hack squat, a dumbbell rack along the mirrors and treadmills and bikes — plus a small stretch room with kettlebells and stability balls.",
     ],
     photos: [
-      { src: rRoom, asset: "7d3726e0", alt: "The whole room: dumbbells, a lifting platform, racks and machines under the black ceiling and long LED lights", caption: "The whole room", source: shot },
-      { src: rSelect, asset: "db02f441", alt: "A line of selectorized machines with red seats and pads", caption: "The selectorized line", source: shot },
+      { src: rWholeRoom, asset: "IMG_8767", alt: "The whole room from the back: racks, a lifting platform, a bike and the dumbbell rack under the black ceiling and long LED lights, the storefront at the far end", caption: "The whole room" },
+      { src: rSelectLine, asset: "IMG_8762", alt: "A line of grey selectorized machines with red seats and pads", caption: "The selectorized line" },
       { src: rStretch, asset: "abde4f79", alt: "A small stretch room with kettlebells, stability balls and a wall-mounted TV", caption: "The stretch room", position: "50% 60%", source: shot },
     ],
   },
@@ -65,26 +68,32 @@ export const rosendale: LocationPage = {
     intro: "Listed from our own photos of the gym — ask us about anything specific.",
     groups: [
       { group: "Strength", items: ["Selectorized machines with red seats", "Half racks", "Plate-loaded hack squat and machines", "Dumbbell rack and benches", "Lifting platform"] },
-      { group: "Cardio", items: ["Woodway curved treadmill", "Matrix treadmill", "Bikes and more cardio"] },
+      { group: "Cardio", items: ["Woodway curved treadmill", "Matrix treadmills", "Concept2 rower", "Bikes and more cardio"] },
       { group: "Also here", items: ["Stretch room with kettlebells and stability balls", "Glass storefront on S. Main St.", "24/7 key-fob entry", "Staffed by appointment"] },
     ],
   },
   services: { items: [] },
-  // Gallery trimmed to the six clearest photos until camera originals are reshot (owner default, Nov 2026).
   gallery: {
     photos: [
-      { src: rRoom, asset: "7d3726e0", alt: "The whole room from the back, looking toward the storefront", caption: "The whole room", source: shot },
-      { src: rStorefront, asset: "f51fb04f", alt: "Racks and benches facing the glass storefront doors", caption: "Toward the storefront", source: shot },
-      { src: rSelect, asset: "db02f441", alt: "Selectorized machines with red seats in a line", caption: "Selectorized line", source: shot },
-      { src: rPlateRacks, asset: "77cf3e46", alt: "Plate-loaded machines and racks beside a lifting platform", caption: "Plate-loaded and racks", source: shot },
-      { src: rCardioX, asset: "4473e58d", alt: "A cardio corner with bikes and an air bike in front of a blue wall with a white X graphic", caption: "Cardio by the X wall", source: shot },
-      { src: rRacksBenches, asset: "84810edb", alt: "Racks and benches along the striped walls", caption: "Racks and benches", source: shot },
+      { src: rWholeRoom, asset: "IMG_8767", alt: "The whole room from the back, looking toward the storefront", caption: "The whole room" },
+      { src: rPlatformStore, asset: "IMG_8769", alt: "A half rack beside a wooden lifting platform, the glass storefront doors at the far end", caption: "Rack and platform by the storefront" },
+      { src: rDownRoom, asset: "IMG_8776", alt: "Looking down the long room: benches, dumbbell racks and machines under rows of LED lights", caption: "Down the room" },
+      { src: rSelectLine, asset: "IMG_8762", alt: "A line of grey selectorized machines with red seats and pads", caption: "The selectorized line" },
+      { src: rTreadX, asset: "IMG_8748", alt: "Matrix treadmills and a curved manual treadmill in front of the blue wall with the white X graphic", caption: "Treadmills by the X wall" },
+      { src: rRacks24, asset: "IMG_8774", alt: "Half racks and a wooden platform along the striped wall, a white plate-loaded machine on the right", caption: "Racks and platform" },
+      { src: rCardioRow, asset: "IMG_8750", alt: "The cardio row: an air bike, a recumbent bike and treadmills along the blue X wall", caption: "The cardio row" },
+      { src: rBenches, asset: "IMG_8772", alt: "Adjustable benches and a red preacher curl bench on rubber mats, dumbbell racks along the wall", caption: "Benches and dumbbells" },
+      { src: rDbWall, asset: "IMG_8778", alt: "Dumbbell racks and battle ropes along the mirrored wall, benches in front", caption: "The dumbbell wall" },
+      { src: rRower, asset: "IMG_8751", alt: "A Concept2 rower in front of the dumbbell rack, beside a blue-framed doorway", caption: "Rower and dumbbells" },
+      { src: rPlates, asset: "IMG_8770", alt: "Bumper plates on a tree in the foreground, benches and machines across the room", caption: "Plates and benches" },
+      { src: rSelect1, asset: "IMG_8752", alt: "A grey selectorized machine with red pads against the striped grey-and-white wall", caption: "Selectorized machine" },
+      { src: rStretch, asset: "abde4f79", alt: "A small stretch room with kettlebells, stability balls and a wall-mounted TV", caption: "The stretch room", source: shot },
     ],
   },
   testimonials: [],
-  closing: { photo: { src: rDumbbells, asset: "3105a8e9", alt: "", caption: "" } },
+  closing: { photo: { src: rDbWall, asset: "IMG_8778", alt: "", caption: "" } },
   missingPhotos: [
-    "Camera originals for all 12 photos (highest priority — current files are screenshots)",
+    "Camera original of the stretch room (the rest now use camera originals)",
     "Exterior / storefront on S. Main St.",
     "An appointment / onboarding moment",
     "People training (with consent)",

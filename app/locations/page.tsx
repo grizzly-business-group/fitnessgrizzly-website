@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageShell from "@/components/page/PageShell";
 import PageHero from "@/components/page/PageHero";
 import { CtaBand, Section, SectionHead } from "@/components/page/Blocks";
+import nlTeaser from "@/public/media/new-london/nl-main-floor.jpg";
 import { Button, FobDot, Unverified } from "@/components/ui/primitives";
 import { joinHref, locations, staffedPhrase } from "@/lib/data/locations";
 import { pageFor } from "@/lib/data/location-pages";
@@ -27,7 +28,7 @@ export default function LocationsHub() {
         crumbs={crumbs}
         eyebrow="Five gyms · open 24/7"
         title={<>Pick your<br />home gym.</>}
-        lead="Five real gyms in five Wisconsin towns, each open 24/7 with your key fob. Every one has its own room, its own iron and its own staffed hours."
+        lead="Five real gyms in five Wisconsin towns, each open 24/7 with your key fob. Every one has its own room, its own equipment and its own staffed hours."
       >
         <nav aria-label="Jump to a gym">
           <ul className="flex flex-wrap gap-2">
@@ -140,6 +141,21 @@ export default function LocationsHub() {
           <a href={to("/memberships")} className="font-semibold text-bone underline decoration-lamp underline-offset-4 hover:text-lamp">Memberships</a>
         </p>
       </Section>
+
+      <section aria-labelledby="nl-teaser-title" className="border-t border-[var(--line)] bg-iron">
+        <a href={to("/new-london")} className="group mx-auto grid max-w-[1440px] items-stretch md:grid-cols-2">
+          <span className="relative block aspect-[16/9] overflow-hidden md:aspect-auto md:min-h-[320px]">
+            <Image src={nlTeaser} alt="Concept mockup of the planned New London main floor" fill sizes="(min-width:768px) 50vw, 100vw" className="object-cover brightness-[.8] transition-[filter] duration-300 group-hover:brightness-100" />
+            <span className="absolute left-3 top-3 bg-iron/80 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-bone">Concept mockup</span>
+          </span>
+          <span className="flex flex-col justify-center gap-4 px-[var(--margin)] py-12 md:px-12">
+            <span className="self-start -skew-x-12 bg-[#c8312b] px-4 py-1.5"><span className="block skew-x-12 font-display text-[22px] font-extrabold uppercase tracking-[0.12em] text-white">Coming soon</span></span>
+            <h2 id="nl-teaser-title" className="font-display text-[clamp(52px,6vw,88px)] font-extrabold uppercase leading-[0.85] text-bone">New London</h2>
+            <span className="text-[16px] text-bone-2">210 Wisconsin St. · 24/7 · Founders pricing from $15 bi-weekly</span>
+            <span className="text-[15px] font-semibold text-lamp group-hover:text-lamp-hover">Join the founders list →</span>
+          </span>
+        </a>
+      </section>
 
       <CtaBand title="Five towns." accent="One fob away." photo={berlinDumbbells} secondary={{ label: "Memberships", href: "/memberships" }} />
     </PageShell>

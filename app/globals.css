@@ -189,6 +189,20 @@ html[data-menu-open] [data-mobile-bar] { display: none; }
   html:not([data-motion="full"]) .gym:hover .gym-info { opacity: 1; pointer-events: auto; transform: none; transition-delay: .25s, .25s; }
   html:not([data-motion="full"]) .gym:focus-within .gym-info { opacity: 1; pointer-events: auto; transform: none; transition-delay: 0s, 0s; transition-duration: .15s, .15s; }
 }
+/* Audit fix (Nov 2026): no overlap while a column opens or closes. A column that goes dark drops its details
+   at once (0.15 s) and only brings its vertical name back after it has narrowed; a column that lights up hides
+   its vertical name at once and fades its details in once it has widened. */
+@media (min-width: 1024px) {
+  .gym-info { transition: opacity .15s 0s, transform .2s 0s; }
+  .gym-vname { transition: opacity .3s .5s, color .25s; }
+  .gym[data-active="true"] .gym-vname,
+  html:not([data-motion="full"]) .gym:hover .gym-vname,
+  html:not([data-motion="full"]) .gym:focus-within .gym-vname { transition: opacity .1s 0s, color .25s; }
+  .gym[data-active="true"] .gym-info,
+  html:not([data-motion="full"]) .gym:hover .gym-info { transition: opacity .45s .45s, transform .6s .45s var(--ease-out-grizzly); }
+  /* Keyboard focus never waits: focused details appear at once. */
+  .gym:focus-within .gym-info { transition: opacity .15s 0s, transform .15s 0s; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .15s !important; }
@@ -286,8 +300,8 @@ html[data-intro="play"] [data-intro-header] { animation: gf-appear .6s 2.95s eas
 @media (min-width: 1024px) {
   html[data-motion="full"] .ch-media {
     --beam: 150%;
-    -webkit-mask-image: radial-gradient(circle at 58% 52%, #000 var(--beam), transparent calc(var(--beam) + 22%));
-    mask-image: radial-gradient(circle at 58% 52%, #000 var(--beam), transparent calc(var(--beam) + 22%));
+    -webkit-mask-image: radial-gradient(circle at 58% 52%, #000 var(--beam), transparent calc(var(--beam) + 8%));
+    mask-image: radial-gradient(circle at 58% 52%, #000 var(--beam), transparent calc(var(--beam) + 8%));
   }
   html[data-motion="full"] .lights { height: 100vh; max-height: none; }
 }
@@ -412,3 +426,28 @@ html[data-motion="reduced"] .loc-in, html[data-motion="reduced"] .loc-hero-photo
   .about-tl-fill { transform: none; }
   .about-gym-preview { transition: none; }
 }
+
+/* ---------- Phone swipe rows (Nov 2026 audit: homepage was ~22 phone screens) ----------
+   Below 1024px the gym cards, story chapters, services and testimonials become one horizontal row each that
+   you swipe through (scroll-snap, native scrolling, no JS). Each card shows a sliver of the next one so it's
+   obvious there's more. Desktop layouts are unchanged. */
+.swipe-hint { display: none; }
+@media (max-width: 1023.98px) {
+  .swipe {
+    display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    scrollbar-width: none; gap: 12px; margin-inline: calc(var(--margin) * -1); padding-inline: var(--margin);
+    scroll-padding-inline: var(--margin);
+  }
+  .swipe::-webkit-scrollbar { display: none; }
+  .swipe > * { flex: 0 0 86%; scroll-snap-align: start; min-width: 0; }
+  .swipe-hint { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--color-steel); }
+  .lights.swipe { margin-inline: 0; }
+  .story-stage.swipe { margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; gap: 2px; }
+  .story-stage.swipe > * { flex-basis: 90%; }
+  .story-stage.swipe .ch-text { padding-top: 40px; padding-bottom: 24px; }
+}
+
+/* New London marquee (coming-soon band). Two identical halves slide left by 50% for a seamless loop. */
+.nl-marquee-track { animation: nl-marquee 38s linear infinite; }
+@keyframes nl-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .nl-marquee-track { animation: none; } }

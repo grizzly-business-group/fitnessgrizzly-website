@@ -23,10 +23,10 @@ export type Chapter = {
 
 export const chapters: Chapter[] = [
   {
-    id: "real-iron",
-    title: "Real iron",
-    headline: ["Equipment", "with a past."],
-    body: "Our gyms have an old-school feel and feature Hammer Strength, Precor, Matrix, Cybex, Nautilus and Magnum pieces of all kinds — plate-loaded machines, racks and dumbbells built for real work.",
+    id: "equipment",
+    title: "Real equipment",
+    headline: ["Equipment for", "every level."],
+    body: "Our gyms have an old-school feel and feature Hammer Strength, Precor, Matrix, Cybex, Nautilus and Magnum pieces of all kinds — plate-loaded and selectorized machines, racks, dumbbells and cardio, whether it's your first workout or your thousandth.",
     stat: ["Hammer Strength · Precor · Matrix", "Cybex · Nautilus · Magnum"],
     image: omroLegs,
     alt: "Plate-loaded leg machines at Grizzly Fitness Omro",
@@ -152,8 +152,8 @@ export const testimonials = [
     context: "Wautoma",
   },
   {
-    quote: "Great equipment hard core stuff. If you are serious about building a great physique this is an outstanding gym.",
-    name: "Mitch Melan",
+    quote: "Awesome gym! Super cool people, training, equipment, and atmosphere all around. I would recommend 10/10.",
+    name: "Caleb Kozlowski",
     context: "Princeton",
   },
 ];

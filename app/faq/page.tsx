@@ -6,7 +6,7 @@ import HashDetails from "@/components/page/HashDetails";
 import { Section } from "@/components/page/Blocks";
 import { Button, Unverified } from "@/components/ui/primitives";
 import { faqCategories, type FaqBlock } from "@/lib/data/site-pages/faq";
-import { links, site } from "@/lib/data/site";
+import { site, startHref } from "@/lib/data/site";
 import { to } from "@/lib/paths";
 
 /**
@@ -145,7 +145,7 @@ export default function FaqPage() {
             <Button href={to("/members")} variant="secondary">
               Member support
             </Button>
-            <Button href={to(links.join.href)} arrow>
+            <Button href={to(startHref)} arrow>
               Join online
             </Button>
           </div>

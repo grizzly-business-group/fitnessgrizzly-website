@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { withShare } from "@/lib/seo";
 import PageShell from "@/components/page/PageShell";
 import PageHero from "@/components/page/PageHero";
-import { CtaBand, Ext, Section, SectionHead } from "@/components/page/Blocks";
+import { CtaBand, Section, SectionHead } from "@/components/page/Blocks";
 import { Button, FobDot, SiteLink } from "@/components/ui/primitives";
 import { locations, staffedPhrase } from "@/lib/data/locations";
 import { access, renew } from "@/lib/data/site-pages/members";
 import { faqCategories } from "@/lib/data/site-pages/faq";
-import { links, site } from "@/lib/data/site";
+import { site, startHref } from "@/lib/data/site";
 import bDesk from "@/public/media/berlin/berlin-front-desk-supplements.jpg";
 import pRacks from "@/public/media/princeton/princeton-racks-platform.jpg";
 import { to } from "@/lib/paths";
@@ -49,7 +49,7 @@ export default function MembersPage() {
       <nav aria-label="Member support: choose what you need" className="border-y border-[var(--line)] bg-charcoal">
         <ul className="mx-auto grid max-w-[1440px] gap-px bg-[var(--line)] px-0 sm:grid-cols-2 lg:grid-cols-5">
           {[
-            { h: links.join.href, t: "New here?", d: "Join online in a few minutes", ext: true },
+            { h: startHref, t: "New here?", d: "Pick your gym and join online" },
             { h: "#renew", t: "Renew", d: "Three steps in the GymMaster app" },
             { h: "#app", t: "Your account", d: "App and member portal log-in" },
             { h: "#access", t: "Key fob & getting in", d: "Pickup, 24/7 access, unstaffed hours" },
@@ -58,14 +58,12 @@ export default function MembersPage() {
             <li key={c.t} className="bg-charcoal">
               <a
                 href={to(c.h)}
-                {...(c.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="group flex h-full flex-col gap-1 px-[var(--margin)] py-5 hover:bg-iron lg:px-6"
               >
                 <span className="font-display text-[22px] font-bold uppercase leading-none group-hover:text-lamp">
-                  {c.t} <span aria-hidden>{c.ext ? "↗" : "→"}</span>
+                  {c.t} <span aria-hidden>→</span>
                 </span>
                 <span className="text-[14px] text-bone-2">{c.d}</span>
-                {c.ext && <span className="sr-only"> (opens GymMaster sign-up in a new tab)</span>}
               </a>
             </li>
           ))}
@@ -198,7 +196,7 @@ export default function MembersPage() {
           ))}
         </ul>
         <p className="mt-10 text-[15px] text-bone-2" data-loc-reveal>
-          Not a member yet? <Ext href={to(links.join.href)} className="font-semibold text-bone underline decoration-lamp underline-offset-4 hover:text-lamp">Join online</Ext> or{" "}
+          Not a member yet? <a href={to(startHref)} className="font-semibold text-bone underline decoration-lamp underline-offset-4 hover:text-lamp">Join online</a> or{" "}
           <a href={to("/memberships")} className="font-semibold text-bone underline decoration-lamp underline-offset-4 hover:text-lamp">see membership options</a>.
         </p>
         {/* Small, deliberately quiet route to the hidden cancellation page (owner, 23 Nov 2026). */}

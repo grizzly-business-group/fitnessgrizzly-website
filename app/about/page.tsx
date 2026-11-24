@@ -11,7 +11,7 @@ import { locationPages } from "@/lib/data/location-pages";
 import { about } from "@/lib/data/site-pages/about";
 import { model, timeline, welcome } from "@/lib/data/site-pages/history";
 import { serviceWhere } from "@/lib/data/site-pages/training";
-import { links } from "@/lib/data/site";
+import { links, startHref } from "@/lib/data/site";
 import wBoxed from "@/public/media/wautoma/wautoma-2021-boxed-equipment.jpg";
 import wCardioArrives from "@/public/media/wautoma/wautoma-2021-cardio-arrives.jpg";
 import bForklift from "@/public/media/berlin/berlin-buildout-forklift.jpg";
@@ -364,7 +364,7 @@ export default function AboutPage() {
               </h2>
             </div>
             <p className="text-[17px] leading-[1.65] text-bone-2 lg:col-span-5">
-              No two Grizzly gyms are the same building — a historic downtown room, a warehouse, a Main Street hub, an old-school iron gym and a bright storefront. All five are open 24/7 with your key fob.
+              No two Grizzly gyms are the same building — a historic downtown room, a warehouse, a Main Street hub, an old-school strength room and a bright storefront. All five are open 24/7 with your key fob.
             </p>
           </div>
           <div className="mt-14">
@@ -491,7 +491,7 @@ export default function AboutPage() {
           <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row" data-loc-reveal>
             <Button href={to("/locations")} arrow>Find your gym</Button>
             <Button href={to("/memberships")} variant="secondary">Explore memberships</Button>
-            <Button href={to(links.join.href)} variant="secondary">Join online</Button>
+            <Button href={to(startHref)} variant="secondary">Join online</Button>
           </div>
           <ul className="mx-auto mt-14 flex max-w-[900px] flex-wrap justify-center gap-x-6 gap-y-3 text-[14px] font-semibold" data-loc-reveal>
             {locations.map((l) => (

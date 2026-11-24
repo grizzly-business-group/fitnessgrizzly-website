@@ -59,7 +59,7 @@ export const consult = {
 /** /sppt — verbatim (headline capitalisation calmed). */
 export const sppt = {
   kicker: "Semi-private personal training",
-  headline: "Transform your fitness journey with semi-private personal training.",
+  headline: "Two to six people. One coach. Your plan.",
   intro:
     "Experience Semi Private Personal Training at Grizzly Fitness. Get personalized coaching in a supportive small-group setting designed to help you build strength, improve mobility, and stay consistent. Our semi-private training model gives you focused guidance from expert coaches while still benefiting from the motivation of a small community. See how our locations can help you reach your goals with a program built around you.",
   whatTitle: "What is semi-private personal training?",

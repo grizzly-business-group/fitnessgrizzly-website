@@ -123,12 +123,15 @@ export default function HomeMotion() {
 
 /* ---------------- R1 · Enter reveals ---------------- */
 function reveals() {
-  const els = gsap.utils.toArray<HTMLElement>("[data-reveal]");
-  gsap.set(els, { autoAlpha: 0, y: 40 });
+  // Audit fix (Nov 2026): only content that starts BELOW the fold is pre-hidden, and only with opacity (never
+  // visibility:hidden), so anything on screen at load paints at once (Speed Index) and stays findable.
+  const els = gsap.utils.toArray<HTMLElement>("[data-reveal]").filter((el) => el.getBoundingClientRect().top > window.innerHeight);
+  if (!els.length) return;
+  gsap.set(els, { opacity: 0, y: 40 });
   ScrollTrigger.batch(els, {
     start: "top 88%",
     once: true,
-    onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.08, overwrite: true }),
+    onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.08, overwrite: true }),
   });
 }
 
@@ -186,6 +189,9 @@ function storyPinned(): () => void {
     tl.to(texts[i - 1], { opacity: 0, y: -14, duration: 0.2 }, at)
       .fromTo(medias[i], { opacity: 1, "--beam": "0%" }, { "--beam": "150%", duration: 0.5 }, at)
       .fromTo(imgs[i], { scale: 1.08 }, { scale: 1, duration: 0.55, ease: "power2.out" }, at)
+      // Audit fix: once the new photo has fully covered the old one, drop the old one, so the two never
+      // read as a double exposure (reverses cleanly when scrolling back up).
+      .set(medias[i - 1], { opacity: 0 }, at + 0.5)
       .fromTo(texts[i], { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.25 }, at + 0.25)
       .addLabel(`ch${i}`, i);
   }

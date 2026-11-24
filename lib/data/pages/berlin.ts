@@ -1,11 +1,7 @@
 import type { LocationPage } from "../location-pages";
 
-import bTurfFlags from "@/public/media/berlin/berlin-turf-flags.jpg";
-import bMainFloor from "@/public/media/berlin/berlin-main-floor-turf.jpg";
 import bTurfCircuit from "@/public/media/berlin/berlin-turf-strength-circuit.jpg";
 import bPowerRack from "@/public/media/berlin/berlin-power-rack.jpg";
-import bPlateCluster from "@/public/media/berlin/berlin-plate-loaded-cluster.jpg";
-import bBenches from "@/public/media/berlin/berlin-benches-cobalt-wall.jpg";
 import bDumbbells from "@/public/media/berlin/berlin-dumbbells-service-flags.jpg";
 import bConquer from "@/public/media/berlin/berlin-cardio-conquer-banner.jpg";
 import bCardioCobalt from "@/public/media/berlin/berlin-cardio-cobalt-wall.jpg";
@@ -14,6 +10,20 @@ import bMezzLifeFitness from "@/public/media/berlin/berlin-mezzanine-life-fitnes
 import bLounge from "@/public/media/berlin/berlin-lounge.jpg";
 import bDesk from "@/public/media/berlin/berlin-front-desk-supplements.jpg";
 import bPlatforms from "@/public/media/berlin/berlin-platforms-functional-trainer.jpg";
+// Newest photos from the owner's Berlin album (2025–2026), edited for exposure, colour and sharpness only.
+import bWide from "@/public/media/berlin/berlin-2025-main-floor-wide.jpg";
+import bColumns from "@/public/media/berlin/berlin-2025-main-floor-columns.jpg";
+import bEntryMural from "@/public/media/berlin/berlin-2025-entry-mural.jpg";
+import bTurfSled from "@/public/media/berlin/berlin-2025-turf-sled.jpg";
+import bBearBenches from "@/public/media/berlin/berlin-2025-bear-mural-benches.jpg";
+import bSelectRoom from "@/public/media/berlin/berlin-2026-selectorized-room.jpg";
+import bTurfBear from "@/public/media/berlin/berlin-2026-turf-bear-wall.jpg";
+import bRacksFlags from "@/public/media/berlin/berlin-2026-racks-service-flags.jpg";
+import bYellowBench from "@/public/media/berlin/berlin-2026-yellow-bench-press.jpg";
+import bPlatesFloor from "@/public/media/berlin/berlin-2026-plates-main-floor.jpg";
+import bBeam from "@/public/media/berlin/berlin-2026-grizzly-beam.jpg";
+import bRackArea from "@/public/media/berlin/berlin-2026-rack-area.jpg";
+import bCables from "@/public/media/berlin/berlin-2026-cable-stations.jpg";
 import bBuildFraming from "@/public/media/berlin/berlin-warehouse-before.jpg";
 import bBuildForklift from "@/public/media/berlin/berlin-buildout-forklift.jpg";
 import bBuildLift from "@/public/media/berlin/berlin-buildout-scissor-lift.jpg";
@@ -47,11 +57,11 @@ export const berlin: LocationPage = {
   hero: {
     variant: "split",
     photo: {
-      src: bTurfFlags,
-      asset: "2b358b5a",
-      alt: "A long green turf lane beneath a row of international flags in the Grizzly Fitness Berlin warehouse",
-      caption: "The turf lane under the flags",
-      position: "50% 40%",
+      src: bBearBenches,
+      asset: "IMG_0615",
+      alt: "A huge painted bear with lightning on the cobalt-blue wall above yellow-frame bench press stations at Grizzly Fitness Berlin",
+      caption: "Bench stations under the bear mural",
+      position: "50% 35%",
     },
     eyebrow: "02 — The Warehouse",
     lead: "A warehouse built out for training: a mezzanine cardio section up top, a heavy lifting section below, a turf area for functional fitness and over 80 pieces of equipment.",
@@ -64,7 +74,7 @@ export const berlin: LocationPage = {
   order: ["facts", "levels", "equipment", "services", "gallery", "archive", "membership", "others", "cta"],
   levels: {
     eyebrow: "Two levels, one warehouse",
-    heading: ["Cardio upstairs.", "Iron below."],
+    heading: ["Cardio upstairs.", "Strength below."],
     intro:
       "Berlin is an open steel-frame warehouse in the Industrial Park, painted out in black, cobalt blue and yellow, with a mezzanine level above the main floor and flags along the walls.",
     zones: [
@@ -149,12 +159,20 @@ export const berlin: LocationPage = {
   gallery: {
     shape: "portrait",
     photos: [
-      { src: bTurfFlags, asset: "2b358b5a", alt: "Green turf lane beneath a row of international flags", caption: "Turf under the flags" },
-      { src: bMainFloor, asset: "ca90cc80", alt: "The main floor: rows of machines, the green turf lane and flags along the far wall", caption: "The main floor" },
-      { src: bTurfCircuit, asset: "c36f70a3", alt: "White strength machines with blue pads beside the turf under the steel ceiling", caption: "Turf and strength machines" },
-      { src: bPlateCluster, asset: "5c926edf", alt: "A cluster of white plate-loaded machines under a long row of flags", caption: "Plate-loaded machines" },
+      { src: bTurfBear, asset: "IMG_3059", alt: "The green turf lane with a sled, leading to the blue wall with the painted bear and rows of white machines", caption: "Turf to the bear wall" },
+      { src: bWide, asset: "IMG_0595", alt: "Wide view of the main floor: white plate-loaded machines with blue pads between black steel columns, flags and a blue wall at the far end", caption: "The main floor, end to end" },
+      { src: bBearBenches, asset: "IMG_0615", alt: "A huge painted bear with lightning on the cobalt-blue wall above yellow-frame bench press stations", caption: "Bench stations under the bear" },
+      { src: bBeam, asset: "IMG_6710", alt: "A long aisle of cream-coloured machines leading to the blue wall, GRIZZLY FITNESS lettered on a steel beam overhead", caption: "Under the Grizzly Fitness beam" },
+      { src: bEntryMural, asset: "IMG_0605", alt: "The entry hallway with a Grizzly Fitness graffiti mural and a bear head painted across the far wall", caption: "The mural by the entrance" },
+      { src: bPlatesFloor, asset: "IMG_6612", alt: "Coloured bumper plates on a rack in the foreground, white and blue machines across the main floor under a Grizzly Fitness sign", caption: "Plates and the main floor" },
+      { src: bRacksFlags, asset: "IMG_6506", alt: "White half racks and a bench with a blue pad beneath US military service flags", caption: "Racks under the service flags" },
+      { src: bTurfSled, asset: "IMG_0611", alt: "A plate-loaded sled on the green turf, white plate-loaded machines and the blue bear wall behind", caption: "Sled on the turf" },
+      { src: bColumns, asset: "IMG_0596", alt: "Rows of white strength machines with blue pads between black steel columns, international flags along the right wall", caption: "Between the columns" },
+      { src: bCables, asset: "IMG_6829", alt: "White cable stations and plate-loaded machines with blue pads, military flags along the far wall", caption: "Cable stations" },
+      { src: bYellowBench, asset: "IMG_6522", alt: "A yellow-frame bench press and plate-loaded machines, a wooden stool beside them", caption: "Bench press and plate-loaded" },
+      { src: bRackArea, asset: "IMG_6713", alt: "Black power racks, benches and an air bike in front of a wall with a painted bear", caption: "The rack area" },
+      { src: bSelectRoom, asset: "IMG_3008", alt: "A side room lined with grey selectorized machines, a stability ball and banners on the wall", caption: "Selectorized machines" },
       { src: bPowerRack, asset: "ee453246", alt: "A black power rack on a wooden lifting platform, flags overhead", caption: "Power rack on a platform" },
-      { src: bBenches, asset: "2d4be4c7", alt: "Bench press stations with yellow frames lined up against a cobalt-blue wall", caption: "Benches on the cobalt wall" },
       { src: bDumbbells, asset: "ec3ed59a", alt: "A long dumbbell rack beneath US military service flags", caption: "Dumbbells under the service flags" },
       { src: bPlatforms, asset: "7882943e", alt: "A lifting platform with a barbell in front of a cable and functional trainer, black ceiling overhead", caption: "Platforms and functional trainer" },
       { src: bMezzLifeFitness, asset: "c773398a", alt: "Grey Life Fitness selectorized machines on the mezzanine beneath flags, the railing along the right", caption: "Mezzanine · Life Fitness line" },
@@ -166,7 +184,7 @@ export const berlin: LocationPage = {
     ],
   },
   archive: {
-    eyebrow: "Before the iron",
+    eyebrow: "Before the build-out",
     heading: ["From an empty", "warehouse."],
     body: "Berlin started as a bare warehouse. These are the build-out photos from our Berlin gallery: wooden framing going up, a forklift on the bare floor, the crew on a scissor lift and the first wall painted blue.",
     photos: [
@@ -177,9 +195,8 @@ export const berlin: LocationPage = {
     ],
   },
   testimonials: [],
-  closing: { photo: { src: bDumbbells, asset: "ec3ed59a", alt: "", caption: "" } },
+  closing: { photo: { src: bTurfBear, asset: "IMG_3059", alt: "", caption: "" } },
   missingPhotos: [
-    "Landscape (16:9) wide shots — every current Berlin photo is portrait",
     "Mezzanine: a wide shot showing the whole upper level, and one from the main floor looking up (owner confirmed the old \"mezzanine\" photo was not the mezzanine — Phase 5)",
     "The tanning room (the Wix page used a stock render)",
     "Exterior on N. Industrial Park Rd",

@@ -4,7 +4,7 @@ import { Eyebrow, Grain, Unverified } from "@/components/ui/primitives";
 import { to } from "@/lib/paths";
 
 /**
- * S3 — Four chapters: Real iron (Omro) · Open 24/7 (Berlin) · Coaching (Princeton) · Community (Wautoma).
+ * S3 — Four chapters: Real equipment (Omro) · Open 24/7 (Berlin) · Coaching (Princeton) · Community (Wautoma).
  * Default layout (mobile, reduced motion, no JS): four stacked chapters.
  * With motion (desktop): `html[data-motion="full"]` overlays the chapters in one pinned stage
  * and HomeMotion scrubs between them.
@@ -12,7 +12,7 @@ import { to } from "@/lib/paths";
 export default function S3Story() {
   return (
     <section id="story" data-scene="story" aria-label="What Grizzly Fitness is built on" className="story relative bg-iron">
-      <div data-story-stage className="story-stage">
+      <div data-story-stage className="story-stage swipe" role="region" aria-label="Four chapters">
         {chapters.map((c, i) => (
           <article key={c.id} id={`chapter-${c.id}`} data-chapter={i} className="story-chapter" aria-labelledby={`ch-${c.id}`}>
             <div data-ch-text className="ch-text px-[var(--margin)] pb-10 pt-20 lg:pb-0 lg:pt-0">
@@ -60,6 +60,7 @@ export default function S3Story() {
         ))}
 
         {/* Progress / jump list — only visible in the pinned (motion) layout */}
+        <div className="px-[var(--margin)] lg:hidden"><p aria-hidden className="swipe-hint">Swipe for more <span>→</span></p></div>
         <nav data-story-progress aria-label="Chapters" className="story-progress px-[var(--margin)]">
           <ol className="max-w-[440px]">
             {chapters.map((c, i) => (

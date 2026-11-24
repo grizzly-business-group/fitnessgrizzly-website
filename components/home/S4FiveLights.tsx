@@ -26,7 +26,7 @@ export default function S4FiveLights() {
         </p>
       </div>
 
-      <div data-lights className="lights">
+      <div data-lights className="lights swipe" role="region" aria-label="Our five gyms">
         {locations.map((l, i) => (
           <article key={l.slug} id={`gym-${l.slug}`} data-gym={i} data-active={i === 0 ? "true" : "false"} className="gym" style={{ ["--brand" as string]: l.color, ["--tint" as string]: l.tint }} tabIndex={-1}>
             <div className="gym-photo absolute inset-0">
@@ -80,6 +80,7 @@ export default function S4FiveLights() {
           </article>
         ))}
       </div>
+      <div className="px-[var(--margin)]"><p aria-hidden className="swipe-hint">Swipe for more <span>→</span></p></div>
     </section>
   );
 }

@@ -143,7 +143,7 @@ export const timeline: Stage[] = [
     dated: true,
     place: "Berlin",
     title: "Berlin opens",
-    body: "A bare Industrial Park warehouse becomes a two-level gym, with cardio on the mezzanine and iron below. Berlin strengthened Grizzly Fitness's presence in Central Wisconsin and helped make it a growing regional brand.",
+    body: "A bare Industrial Park warehouse becomes a two-level gym, with cardio on the mezzanine and strength training below. Berlin strengthened Grizzly Fitness's presence in Central Wisconsin and helped make it a growing regional brand.",
     facts: ["berlin-open", "berlin-region", "berlin-warehouse", "berlin-levels", "photos-berlin"],
   },
   {

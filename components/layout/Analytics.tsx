@@ -8,10 +8,11 @@ import { tracking } from "@/lib/data/site";
  * Analytics + conversion tracking (production builds only, and only for IDs set in lib/data/site.ts → tracking).
  * Live IDs (19 Nov 2026): GA4 G-V6074L14E4 + Meta Pixel 789997473854772, loaded directly (no GTM, no Ads yet).
  * Loads GTM and/or the Google tag (GA4, Google Ads) and the Meta Pixel, then reports:
- *   join_click     — any link to the GymMaster sign-up (gym taken from ?companyid)
+ *   join_click + begin_checkout — any link to the GymMaster sign-up (gym taken from ?companyid). The link also gets
+ *                    utm_content=<page path> at click time, so GymMaster-side analytics can see which page sent the visit
  *   click_to_call  — tel: links          click_to_text — sms: links
  *   generate_lead  — fired by /thank-you (set GHL forms to redirect there on submit)
- * Events go to the dataLayer (for GTM), gtag (GA4/Ads) and fbq (Meta: Lead / Contact / custom JoinClick).
+ * Events go to the dataLayer (for GTM), gtag (GA4/Ads) and fbq (Meta: Lead / Contact / InitiateCheckout).
  */
 type W = Window & { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void; fbq?: (...a: unknown[]) => void };
 const { gtmId, ga4Id, googleAdsId, metaPixelId } = tracking;
@@ -27,7 +28,7 @@ export function track(event: string, params: Record<string, unknown> = {}) {
   if (w.fbq) {
     if (event === "generate_lead") w.fbq("track", "Lead", params);
     else if (event === "click_to_call" || event === "click_to_text") w.fbq("track", "Contact", params);
-    else if (event === "join_click") w.fbq("trackCustom", "JoinClick", params);
+    else if (event === "join_click") w.fbq("track", "InitiateCheckout", { content_name: `Membership — ${params.gym}`, content_category: "membership" });
   }
 }
 
@@ -42,7 +43,16 @@ export default function Analytics() {
       else if (href.startsWith("sms:")) track("click_to_text", { link_url: href });
       else if (/gymmasteronline\.com\/portal\/signup/.test(href)) {
         const id = new URL(href).searchParams.get("companyid") || "";
-        track("join_click", { gym: clubs[id] || "all", link_url: href });
+        const gym = clubs[id] || "all";
+        try {
+          const u = new URL(href);
+          u.searchParams.set("utm_content", location.pathname.replace(/^\/|\/$/g, "") || "home");
+          a.href = u.toString(); // updated before the browser follows the link (capture phase)
+        } catch {
+          /* leave the link as it is */
+        }
+        track("join_click", { gym, link_url: href, page: location.pathname });
+        track("begin_checkout", { items: [{ item_name: `Membership — ${gym}`, item_category: "membership", item_variant: gym }] });
       }
     };
     document.addEventListener("click", onClick, true);

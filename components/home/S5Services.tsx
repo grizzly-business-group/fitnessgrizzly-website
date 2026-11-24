@@ -23,13 +23,13 @@ export default function S5Services() {
           </p>
         </div>
 
-        <ul className="mt-14 grid gap-[2px] border-2 border-paper-2 bg-paper-2 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="swipe mt-14 grid gap-[2px] border-2 border-paper-2 bg-paper-2 max-lg:border-0 max-lg:bg-transparent md:grid-cols-2 lg:grid-cols-3" aria-label="Services">
           {services.map((s, i) => (
             <li
               key={s.id}
               id={`svc-${s.id}`}
               data-reveal
-              className={`flex min-h-[300px] scroll-mt-28 flex-col gap-3.5 p-8 lg:p-9 ${s.feature ? "bg-ink text-bone" : "bg-paper"}`}
+              className={`flex min-h-[300px] scroll-mt-28 flex-col gap-3.5 p-8 max-lg:border-2 max-lg:border-paper-2 lg:p-9 ${s.feature ? "bg-ink text-bone" : "bg-paper"}`}
             >
               <span className={`font-display text-[15px] font-extrabold tracking-[0.12em] ${s.feature ? "text-lamp" : "text-lamp-deep"}`}>0{i + 1}</span>
               <h3 className="font-display text-[28px] lg:text-[30px] font-bold uppercase leading-none">{s.title}</h3>
@@ -58,13 +58,14 @@ export default function S5Services() {
             </li>
           ))}
         </ul>
+        <p aria-hidden className="swipe-hint" style={{ color: "var(--color-ink-2)" }}>Swipe for more <span>→</span></p>
 
         <div id="insurance" data-reveal className="mt-10 flex scroll-mt-28 flex-col gap-3 border-2 border-ink px-7 py-6 lg:flex-row lg:items-center lg:gap-9">
           <p className="font-display text-[22px] font-extrabold uppercase leading-none tracking-[0.03em]">Insurance fitness programs accepted</p>
           <p className="text-[15px] font-semibold text-ink-2">{site.insurancePrograms.join(" · ")}</p>
         </div>
         <p className="mt-4 text-[14px] text-ink-2">
-          Insurance members can train at all five gyms. Prices, passes and membership terms are shown in our GymMaster sign-up portal.
+          Insurance members can train at all five gyms. Memberships start at $14 bi-weekly — <a href={to("/memberships")} className="font-semibold underline decoration-lamp-deep underline-offset-4">see all prices</a>.
         </p>
       </div>
     </section>

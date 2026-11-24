@@ -5,7 +5,7 @@ import PageHero from "@/components/page/PageHero";
 import { CtaBand, Section, SectionHead } from "@/components/page/Blocks";
 import { Button, FobDot } from "@/components/ui/primitives";
 import { locations } from "@/lib/data/locations";
-import { consult, serviceWhere, sppt } from "@/lib/data/site-pages/training";
+import { serviceWhere, sppt } from "@/lib/data/site-pages/training";
 import bPlatforms from "@/public/media/berlin/berlin-platforms-functional-trainer.jpg";
 import pRacks from "@/public/media/princeton/princeton-racks-platform.jpg";
 import { to } from "@/lib/paths";
@@ -28,8 +28,8 @@ const where = serviceWhere.find((s) => s.id === "semi-private")!.listedAt;
 function ConsultButtons({ tone = "dark" }: { tone?: "dark" | "paper" }) {
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
-      <Button href={to(consult.email)} variant={tone === "paper" ? "ink" : "primary"} arrow>
-        Email us to book a consult
+      <Button href={to("#consult")} variant={tone === "paper" ? "ink" : "primary"} arrow>
+        Book a consult
       </Button>
       <Button href={to(`tel:${site.phone.value.tel}`)} variant={tone === "paper" ? "ink-outline" : "secondary"}>
         Call / text {site.phone.value.display}
@@ -44,7 +44,7 @@ export default function PersonalTrainingPage() {
       <PageHero
         crumbs={crumbs}
         eyebrow={sppt.kicker}
-        title={<>Transform your{" "}<br />fitness journey.</>}
+        title={<>Two to six.{" "}<br />One coach.</>}
         lead={sppt.intro}
         photo={{ src: bPlatforms, alt: "A lifting platform with a barbell in front of a cable and functional trainer at Grizzly Fitness Berlin", position: "50% 60%" }}
       >
@@ -100,24 +100,30 @@ export default function PersonalTrainingPage() {
           id="book-title"
           eyebrow="Book a consult"
           title={<>Start with{" "}<br />a consult.</>}
-          intro={
-            ghl.consultCalendar.url
-              ? "Pick a time that works for you. Tell us your goals, any limitations and which gym you'd like to train at."
-              : "Tell us your goals, any limitations and which gym you'd like to train at, and we'll set up a consult with you."
-          }
+          intro="Pick your gym and choose a time. Bring your goals and any limitations — we'll build your plan from there."
         />
-        <GhlEmbed embed={ghl.consultCalendar} className="mt-10" fallback={<div className="mt-10" data-loc-reveal><ConsultButtons /></div>} />
+        <ul className="mt-10 grid gap-3 sm:grid-cols-3">
+          {locations
+            .filter((l) => where.includes(l.slug) && ghl.consult[l.slug])
+            .map((l) => (
+              <li key={l.slug} className="flex flex-col gap-3 border border-[var(--line)] bg-iron p-6" style={{ borderTop: `6px solid ${l.color}` }} data-loc-reveal>
+                <p className="font-display text-[34px] font-extrabold uppercase leading-none">{l.town}</p>
+                <p className="text-[14px] text-bone-2">{l.address.street}, {l.address.city}</p>
+                <Button href={to(ghl.consult[l.slug])} arrow className="mt-auto">
+                  Book at {l.town}
+                </Button>
+              </li>
+            ))}
+        </ul>
+        <p className="mt-6 text-[15px] text-bone-2">
+          Prefer to talk first? Call or text <a href={to(`tel:${site.phone.value.tel}`)} className="font-semibold text-bone underline decoration-lamp underline-offset-4">{site.phone.value.display}</a>.
+        </p>
         {ghl.ptForm.url && (
           <div className="mt-16">
-            <h3 className="font-display text-[clamp(28px,3vw,40px)] font-extrabold uppercase leading-none">Interested in personal training?</h3>
-            <p className="mt-3 max-w-[640px] text-bone-2">Rather we reach out to you? Leave your details and we&apos;ll get in touch.</p>
-            <GhlEmbed embed={ghl.ptForm} className="mt-6" />
+            <h3 className="font-display text-[clamp(28px,3vw,40px)] font-extrabold uppercase leading-none">Rather we reach out?</h3>
+            <p className="mt-3 max-w-[640px] text-bone-2">Leave your details and a coach will get in touch.</p>
+            <GhlEmbed embed={ghl.ptForm} className="mt-6 max-w-[760px]" />
           </div>
-        )}
-        {ghl.consultCalendar.url && (
-          <p className="mt-6 text-[15px] text-bone-2">
-            Prefer to talk first? Call or text <a href={to(`tel:${site.phone.value.tel}`)} className="font-semibold text-bone underline decoration-lamp underline-offset-4">{site.phone.value.display}</a>.
-          </p>
         )}
       </Section>
 

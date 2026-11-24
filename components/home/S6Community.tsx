@@ -24,7 +24,7 @@ export default function S6Community() {
           </h2>
         </div>
 
-        <ul className="mt-14 grid gap-10 md:grid-cols-3 md:gap-6">
+        <ul className="swipe mt-14 grid gap-10 md:grid-cols-3 md:gap-6" tabIndex={0} aria-label="What members say (swipe for more)">
           {testimonials.map((t) => (
             <li key={t.name} data-reveal className="border-t-2 border-lamp pt-7">
               <figure>
@@ -37,6 +37,7 @@ export default function S6Community() {
             </li>
           ))}
         </ul>
+        <p aria-hidden className="swipe-hint">Swipe for more <span>→</span></p>
 
         <div className="mt-24 grid gap-6 lg:mt-32 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-5" data-reveal>

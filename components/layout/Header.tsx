@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { locations } from "@/lib/data/locations";
 import { primaryNav, secondaryNav } from "@/lib/data/nav";
-import { links, site } from "@/lib/data/site";
+import { site, startHref } from "@/lib/data/site";
 import { Button, FobDot } from "@/components/ui/primitives";
 import { gymHref } from "@/lib/data/location-routes";
 import { samePath, to } from "@/lib/paths";
@@ -131,7 +131,7 @@ export default function Header() {
                 </button>
                 <div
                   id="mega-locations"
-                  className={`absolute left-1/2 top-full w-[min(960px,92vw)] -translate-x-[30%] pt-3 transition-[opacity,transform] duration-200 ${
+                  className={`fixed left-1/2 top-[calc(var(--header-h)-20px)] w-[min(960px,92vw)] -translate-x-1/2 pt-6 transition-[opacity,transform] duration-200 ${
                     megaOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-1"
                   }`}
                 >
@@ -152,10 +152,17 @@ export default function Header() {
                       </li>
                     ))}
                   </ul>
-                  <a href={to("/locations")} onClick={() => setMegaOpen(false)} className="mt-[2px] flex items-center justify-between border border-[var(--line-strong)] bg-charcoal px-4 py-3 normal-case tracking-normal text-[14px] font-semibold hover:text-lamp focus-visible:outline-2 focus-visible:outline-lamp">
-                    All five locations — compare hours &amp; services
-                    <span aria-hidden>→</span>
-                  </a>
+                  <div className="mt-[2px] grid grid-cols-[1fr_auto] gap-[2px]">
+                    <a href={to("/locations")} onClick={() => setMegaOpen(false)} className="flex items-center justify-between border border-[var(--line-strong)] bg-charcoal px-4 py-3 normal-case tracking-normal text-[14px] font-semibold hover:text-lamp focus-visible:outline-2 focus-visible:outline-lamp">
+                      All five locations — compare hours &amp; services
+                      <span aria-hidden>→</span>
+                    </a>
+                    <a href={to("/new-london")} aria-current={current("/new-london")} onClick={() => setMegaOpen(false)} className="flex items-center gap-3 border border-[var(--line-strong)] bg-charcoal px-4 py-3 normal-case tracking-normal text-[14px] font-semibold hover:text-lamp focus-visible:outline-2 focus-visible:outline-lamp">
+                      <span className="bg-[#c8312b] px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white">Soon</span>
+                      New London
+                      <span aria-hidden>→</span>
+                    </a>
+                  </div>
                 </div>
               </li>
               {primaryNav.map((n) => (
@@ -184,7 +191,7 @@ export default function Header() {
               Call/Text {phone.display}
 
             </a>
-            <Button href={to(links.join.href)} size="sm" className="lg:min-h-[48px] lg:px-6 lg:text-[13px]">
+            <Button href={to(startHref)} size="sm" className="lg:min-h-[48px] lg:px-6 lg:text-[13px]">
               Join now
             </Button>
             <button
@@ -227,6 +234,12 @@ export default function Header() {
               </a>
             </li>
           ))}
+          <li>
+            <a href={to("/new-london")} aria-current={current("/new-london")} onClick={() => setDrawerOpen(false)} className="flex items-center gap-2.5 bg-charcoal px-3.5 py-3.5 text-[16px] font-semibold">
+              <span className="bg-[#c8312b] px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white">Soon</span>
+              New London
+            </a>
+          </li>
         </ul>
         <ul className="mt-6 border-t border-[var(--line)]">
           {primaryNav.map((n) => (
@@ -274,7 +287,7 @@ export default function Header() {
           <Button href={to(`tel:${phone.tel}`)} variant="secondary" size="sm">
             Call / Text
           </Button>
-          <Button href={to(links.join.href)} size="sm">
+          <Button href={to(startHref)} size="sm">
             Join now
           </Button>
         </div>

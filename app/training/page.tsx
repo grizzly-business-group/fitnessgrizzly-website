@@ -46,7 +46,7 @@ export default function TrainingHub() {
           id="svc-title"
           eyebrow="What we offer"
           title={<>Five ways{" "}<br />to train smarter.</>}
-          intro="Each service is shown with the gyms whose own pages list it. Training at Omro or Rosendale? Ask us what's available there."
+          intro="Each service lists the gyms where it's available. Training at Omro or Rosendale? Call or text us and we'll tell you what's on offer there."
         />
         <ul className="mt-12 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {serviceWhere.map((s, i) => (

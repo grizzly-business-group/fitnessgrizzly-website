@@ -6,7 +6,7 @@ import { locations } from "@/lib/data/locations";
  * XML sitemap of the public, indexable pages (Phase 5D). /equipment-repair (noindex by design), the 404 page
  * and retired URLs are deliberately left out. Only advertised in robots.txt once indexing is enabled.
  */
-const pages = ["/", "/locations", "/memberships", "/training", "/personal-training", "/classes", "/members", "/about", "/gallery", "/faq", "/podcast", "/careers", "/contact", "/terms", "/privacy", "/accessibility"];
+const pages = ["/", "/locations", "/new-london", "/join", "/memberships", "/training", "/personal-training", "/classes", "/members", "/about", "/gallery", "/faq", "/podcast", "/careers", "/contact", "/terms", "/privacy", "/accessibility"];
 
 export const dynamic = "force-static";
 

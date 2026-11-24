@@ -14,7 +14,7 @@ export default function LocationMotion() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-loc-reveal]"));
-    const below = els.filter((el) => el.getBoundingClientRect().top > window.innerHeight * 0.92);
+    const below = els.filter((el) => el.getBoundingClientRect().top > window.innerHeight);
     below.forEach((el) => el.classList.add("loc-pre"));
     // Reveal check runs on the same rAF-throttled scroll tick as the parallax (a plain rect test —
     // more dependable than IntersectionObserver under fast or programmatic scrolling).

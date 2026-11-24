@@ -17,6 +17,17 @@ import wFraming from "@/public/media/wautoma/wautoma-2021-framing.jpg";
 import wTile from "@/public/media/wautoma/wautoma-2021-entry-tile.jpg";
 import wBoxed from "@/public/media/wautoma/wautoma-2021-boxed-equipment.jpg";
 import wCardioArrives from "@/public/media/wautoma/wautoma-2021-cardio-arrives.jpg";
+// Owner's Wautoma albums (2022 main floor; May 2024 strength area), edited for exposure, colour and sharpness only.
+import wStrength from "@/public/media/wautoma/wautoma-2024-strength-area.jpg";
+import wRacks from "@/public/media/wautoma/wautoma-2024-racks.jpg";
+import wPlatform from "@/public/media/wautoma/wautoma-2024-lifting-platform.jpg";
+import wBench from "@/public/media/wautoma/wautoma-2024-bench-press.jpg";
+import wPlateCables from "@/public/media/wautoma/wautoma-2024-plate-loaded-cables.jpg";
+import wRacksBenches from "@/public/media/wautoma/wautoma-2024-racks-benches.jpg";
+import wDownStrength from "@/public/media/wautoma/wautoma-2024-down-the-strength-area.jpg";
+import wMachinesTurf from "@/public/media/wautoma/wautoma-2022-machines-turf.jpg";
+import wFrontDesk from "@/public/media/wautoma/wautoma-2022-front-desk.jpg";
+import wEntrance from "@/public/media/wautoma/wautoma-2022-entrance.jpg";
 
 /*
  * Wautoma — "The Community Hub". Sources: /wautoma (description verbatim, services incl. Exercise
@@ -63,12 +74,12 @@ export const wautoma: LocationPage = {
     heading: ["Something", "for everyone."],
     paragraphs: [
       "Our Wautoma location is great for any fitness enthusiast or beginner. We have a ton of cardio and easy-to-use strength machines as well as a variety of plate-loaded machines. There are two separate free-weight areas, with dumbbells from 5 to 100+ lbs.",
-      "It's one long, bright floor in a converted Main Street retail space: orange walls, a grid of columns, a green turf lane with a sled, and flags along the walls.",
+      "It's one long, bright floor in a converted Main Street retail space: orange walls, a grid of columns, a green turf lane with a sled, and flags along the walls. A newer strength area adds power racks, benches and a lifting platform.",
     ],
     photos: [
       { src: wPlateRows, asset: "f2231d87", alt: "Black plate-loaded machines lined up in rows down the main floor", caption: "Plate-loaded machines in rows", position: "50% 60%" },
       { src: wDumbbells, asset: "1ee40813", alt: "Dumbbell racks and benches under military flags beside an orange wall", caption: "One of the two free-weight areas", position: "50% 55%" },
-      { src: wTreadmills, asset: "769b0caa", alt: "A long row of treadmills facing TVs on the wall", caption: "Treadmills with TVs", position: "50% 55%" },
+      { src: wStrength, asset: "IMG_0034", alt: "The bright strength area: power racks, benches and plate-loaded machines on black rubber flooring under recessed lights", caption: "The strength area", position: "50% 60%" },
     ],
   },
   classes: {
@@ -111,7 +122,7 @@ export const wautoma: LocationPage = {
     groups: [
       { group: "Main floor", items: ["A ton of cardio — treadmills, bikes and more", "Easy-to-use strength machines", "A variety of plate-loaded machines"] },
       { group: "Free weights", items: ["Two separate free-weight areas", "Dumbbells from 5 to 100+ lbs", "Benches"] },
-      { group: "Also here", items: ["Turf lane with a sled", "Main Classroom and Dance Studio", "Longest staffed hours of our five gyms", "24/7 key-fob entry"] },
+      { group: "Also here", items: ["Strength area with power racks, benches and a lifting platform", "Turf lane with a sled", "Main Classroom and Dance Studio", "Longest staffed hours of our five gyms", "24/7 key-fob entry"] },
     ],
   },
   services: {
@@ -137,6 +148,16 @@ export const wautoma: LocationPage = {
   },
   gallery: {
     photos: [
+      { src: wStrength, asset: "IMG_0034", alt: "The bright strength area: power racks, benches and plate-loaded machines under recessed lights, a rustic wood door on the far wall", caption: "The strength area" },
+      { src: wRacks, asset: "IMG_0030", alt: "Power racks and benches on black rubber flooring, a plate-loaded machine along the left wall", caption: "Power racks" },
+      { src: wPlatform, asset: "IMG_0038", alt: "A lifting platform with a barbell and coloured bumper plates, a row of racks along the wall", caption: "Lifting platform" },
+      { src: wBench, asset: "IMG_0081", alt: "An Olympic bench press with a yellow frame beneath a motivational poster", caption: "Bench press" },
+      { src: wRacksBenches, asset: "IMG_0085", alt: "Power racks and a yellow-frame bench across the open floor, black steel columns and a rustic wood door", caption: "Racks and benches" },
+      { src: wPlateCables, asset: "IMG_0072", alt: "A neon-yellow plate-loaded machine and a Nautilus assisted pull-up station, more strength equipment behind", caption: "Plate-loaded and cables" },
+      { src: wDownStrength, asset: "IMG_0103", alt: "Looking down the long strength area: a plate-loaded bench in front, racks along the far wall", caption: "Down the strength area" },
+      { src: wMachinesTurf, asset: "IMG_7581", alt: "Grey selectorized leg machines beside the turf, rows of black plate-loaded machines and orange walls behind", caption: "Machines by the turf" },
+      { src: wFrontDesk, asset: "IMG_8611", alt: "The front of the gym: the reception counter, patterned carpet and a turf strip, windows and an orange wall at the far end", caption: "Up front" },
+      { src: wEntrance, asset: "IMG_8614", alt: "The entrance by the front windows: a supplement shelf, a small counter and a Grizzly Fitness banner", caption: "The entrance" },
       { src: wMainFloor, asset: "8bbb9382", alt: "The wide main floor with black plate-loaded machines, orange walls and military flags", caption: "The main floor" },
       { src: wTurfSled, asset: "6a613b4c", alt: "A green turf lane with a sled, strength machines along both sides", caption: "Turf lane and sled" },
       { src: wDumbbells, asset: "1ee40813", alt: "Dumbbells and benches under military flags beside an orange wall", caption: "Dumbbells and benches" },
@@ -174,7 +195,7 @@ export const wautoma: LocationPage = {
     "Main Classroom reshoot (current photo is underexposed)",
     "Dance Studio exterior at 220 E. Main",
     "Senior Fit class",
-    "Storefront exterior on Main St.",
+    "Storefront exterior on Main St. (the album's exterior shows a shared sign, so it isn't used)",
     "People training, night / 24-7 shot",
   ],
   heldBack: [

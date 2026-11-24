@@ -1,10 +1,11 @@
 import Image from "next/image";
 import hero from "@/public/media/princeton/princeton-front-desk-lamps.jpg";
 import { locations } from "@/lib/data/locations";
-import { links } from "@/lib/data/site";
+import { startHref } from "@/lib/data/site";
 import { Button, Chip, Grain, FobDot } from "@/components/ui/primitives";
 import { gymHref } from "@/lib/data/location-routes";
 import { to } from "@/lib/paths";
+import { OfferStrip, RatingBadge } from "@/components/page/Offer";
 
 /**
  * S1 — Cinematic introduction ("Lights On").
@@ -65,13 +66,15 @@ export default function S1Hero() {
           Five community-first gyms in Princeton, Berlin, Wautoma, Omro and Rosendale. Old-school equipment, coaching when you want it, and a key fob that works 24/7.
         </p>
         <div data-hero-cta className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button href={to(links.join.href)} arrow>
+          <Button href={to(startHref)} arrow>
             Join now
           </Button>
           <Button href={to("#gyms")} variant="secondary">
             Find your gym
           </Button>
         </div>
+        <RatingBadge className="mt-4" />
+        <OfferStrip className="mt-3 max-w-[560px]" />
       </div>
 
       {/* Town bar */}

@@ -3,9 +3,9 @@ import { withShare } from "@/lib/seo";
 import PageShell from "@/components/page/PageShell";
 import PageHero from "@/components/page/PageHero";
 import { Ext, Section, SectionHead } from "@/components/page/Blocks";
-import { Button, FobDot, SiteLink, Unverified } from "@/components/ui/primitives";
+import { Button, FobDot, Unverified } from "@/components/ui/primitives";
 import { locations, staffedPhrase } from "@/lib/data/locations";
-import { ghl, links, site } from "@/lib/data/site";
+import { ghl, links, site, startHref } from "@/lib/data/site";
 import GhlEmbed from "@/components/page/GhlEmbed";
 import { to } from "@/lib/paths";
 
@@ -57,7 +57,7 @@ export default function ContactPage() {
 
       {ghl.contactForm.url && (
         <Section labelledBy="form-title">
-          <SectionHead id="form-title" eyebrow="Message us" title={<>Send us{" "}<br />a message.</>} intro="We reply by phone, text or email — usually within one business day." />
+          <SectionHead id="form-title" eyebrow="Message us" title={<>Send us{" "}<br />a message.</>} intro="Tell us what you need and which gym — we'll get back to you by phone, text or email." />
           <GhlEmbed embed={ghl.contactForm} className="mt-10 max-w-[760px]" />
         </Section>
       )}
@@ -90,7 +90,7 @@ export default function ContactPage() {
         <SectionHead id="routes-title" eyebrow="Quick routes" title={<>Find the{" "}<br />right place.</>} />
         <ul className="mt-12 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {[
-            { t: "Join", b: "Sign up online in a few minutes and pick your home gym.", el: <SiteLink k="join" variant="primary" size="sm" arrow>Join online</SiteLink> },
+            { t: "Join", b: "Sign up online in a few minutes and pick your home gym.", el: <Button href={to(startHref)} size="sm" arrow>Join online</Button> },
             { t: "Members", b: "Renew, billing, the app, key fobs and getting in.", el: <Button href={to("/members")} variant="secondary" size="sm">Member support</Button> },
             { t: "Training", b: "Ask about semi-private personal training and coaching.", el: <Button href={to("/personal-training")} variant="secondary" size="sm">Personal training</Button> },
             { t: "Equipment", b: "Something broken at the gym? Let us know.", el: <Button href={to("/equipment-repair")} variant="secondary" size="sm">Report a problem</Button> },

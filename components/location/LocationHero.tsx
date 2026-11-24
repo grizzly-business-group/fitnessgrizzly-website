@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { joinHref, staffedPhrase, type Location } from "@/lib/data/locations";
 import type { LocationPage, Photo } from "@/lib/data/location-pages";
 import { Button, FobDot, Grain, Unverified } from "@/components/ui/primitives";
+import { OfferStrip, priceLine, RatingBadge } from "@/components/page/Offer";
 import { to } from "@/lib/paths";
 
 /**
@@ -84,8 +85,11 @@ function Ctas({ loc, className = "" }: { loc: Location; className?: string }) {
         </Button>
       </div>
       <p className="loc-in loc-in-4 mt-4 text-[14px] text-bone-2">
-        At sign-up, choose <b className="font-semibold text-bone">Grizzly {loc.town}</b> as your home gym.
+        {priceLine(loc.slug) && <b className="mr-2 font-semibold text-bone">{priceLine(loc.slug)} ·</b>}
+        Your sign-up opens with <b className="font-semibold text-bone">Grizzly {loc.town}</b> already selected.
       </p>
+      <RatingBadge loc={loc} className="loc-in loc-in-4 mt-2" />
+      <OfferStrip className="loc-in loc-in-4 mt-3 max-w-[560px]" />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 Next.js **16.4.6** (App Router, **static export**) · React **19.3** · TypeScript **5.9** · Tailwind CSS **4.3** · GSAP **3.15** + ScrollTrigger.
 
-This folder is the complete source of the new **www.fitnessgrizzly.com**. It builds to a plain static site in `out/` and is hosted on **GitHub Pages**. It has **not been deployed**. The live site is still on Wix and **stays untouched until the owner authorizes the launch**. **Nobody changes DNS until then.**
+This folder is the complete source of **www.fitnessgrizzly.com**. It builds to a plain static site in `out/` and is hosted on **GitHub Pages** (a push to `main` deploys). **DNS changes are for the developer only.**
 
 For the project overview, open business items and the launch checklists, read **`../../START HERE - DEVELOPER HANDOFF.md`** first.
 
@@ -39,7 +39,8 @@ npm run check:launch   # lists every unconfirmed fact/ID; exits 1 if anything is
 Both are read at **build time**, so a change needs a new workflow run (Actions → *Deploy to GitHub Pages* → *Run workflow*).
 
 Business configuration lives in code, in `lib/data/site.ts`:
-- `ghl.ptForm`, `ghl.consultCalendar`, `ghl.contactForm`: GoHighLevel embed URLs. **Empty at launch (owner decision)** = the call/text/email buttons show. Ready to fill later.
+- `ghl.ptForm`, `ghl.contactForm`, `ghl.tourForm`, `ghl.consult` (per-gym calendars): GoHighLevel embeds, **in use since Nov 2026** (/personal-training, /contact, /join). Each GHL form redirects to `/thank-you/` after submit. An empty URL hides that embed and leaves the call/text/email buttons.
+- `startHref` (`/join`), `pricing` (GymMaster prices, 23 Nov 2026; shown on /memberships, /join, gym heroes, FAQ) and `offer` (offer strip; `live: false` = not shown — removed at the owner's request).
 - `tracking`: **GA4 `G-V6074L14E4` + Meta Pixel `789997473854772`** (direct, no GTM). `googleAdsId` is empty and ready for an `AW-…` ID. Empty = that tag doesn't load. Use either GTM or the direct IDs, not both.
 
 ## Deployment (GitHub Pages)
@@ -97,7 +98,7 @@ One-time repo setup (see START HERE §4 for the full order):
 
 | Kind | Routes (all with a trailing slash) |
 |---|---|
-| Pages | `/`, `/about/`, `/locations/`, `/training/`, `/personal-training/`, `/classes/`, `/memberships/`, `/members/`, `/faq/`, `/gallery/`, `/podcast/`, `/careers/`, `/equipment-repair/` (noindex), `/contact/`, `/terms/`, `/privacy/`, `/accessibility/`, `/thank-you/` (noindex, form confirmation), `/cancel/` (hidden: noindex/nofollow, not in menus or the sitemap; embeds the cancellation Google Form; linked only from a small line at the bottom of /members) |
+| Pages | `/`, `/join/` (pick a home gym → GymMaster with that gym preselected; every generic Join button goes here), `/about/`, `/locations/`, `/training/`, `/personal-training/`, `/classes/`, `/memberships/`, `/members/`, `/faq/`, `/gallery/`, `/podcast/`, `/careers/`, `/equipment-repair/` (noindex), `/contact/`, `/terms/`, `/privacy/`, `/accessibility/`, `/thank-you/` (noindex, form confirmation), `/cancel/` (hidden: noindex/nofollow, not in menus or the sitemap; embeds the cancellation Google Form; linked only from a small line at the bottom of /members) |
 | Gym pages | `/locations/princeton/`, `/berlin/`, `/wautoma/`, `/omro/`, `/rosendale/` |
 | Files | `/robots.txt`, `/sitemap.xml` (21 URLs), `/icon.png`, `/apple-icon.png`, `/favicon.ico`, `/404.html` |
 | Errors | Anything else, including `/baraboo`, `/copy-of-berlin` and `/locations/<other>/` → branded 404 (status 404) |
@@ -123,6 +124,6 @@ GitHub Pages answers `/about` with a 301 to `/about/`.
 ## Content rules baked into the code (don't undo)
 - Only five active gyms: Princeton, Berlin, Wautoma, Omro, Rosendale. **Baraboo must not appear.** Green Lake appears only as a former facility on /about.
 - No trainer names anywhere. No class schedules: classes say "Call or text 920-990-2795 for current class times."
-- No stock or AI photos. No prices or "$1" offers.
+- No stock or AI photos. Prices only from `pricing` (GymMaster); no "$1" offers.
 - Unverified values show a † **in development builds only**; `npm run check:launch` keeps them listed until confirmed in `lib/data/`.
 - No payments on the site: memberships are sold and billed in GymMaster.

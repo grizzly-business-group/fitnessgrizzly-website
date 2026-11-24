@@ -1,6 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
-import { links } from "@/lib/data/site";
+import { startHref } from "@/lib/data/site";
 import { Button, Eyebrow } from "@/components/ui/primitives";
 import { to } from "@/lib/paths";
 
@@ -44,7 +44,7 @@ export function CtaBand({ title, accent, photo, secondary }: { title: string; ac
           <span className="text-lamp">{accent}</span>
         </h2>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-          <Button href={to(links.join.href)} arrow>
+          <Button href={to(startHref)} arrow>
             Join online
           </Button>
           <Button href={to(secondary?.href ?? "/locations")} variant="secondary">

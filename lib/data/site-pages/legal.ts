@@ -12,10 +12,11 @@ import { site } from "../site";
 
 export type LegalBlock = { p: string } | { ul: string[] } | { h3: string } | { contact: [string, string] };
 export type LegalDoc = { title: string; updated: string; intro: LegalBlock[]; sections: { h: string; blocks: LegalBlock[] }[] };
-export const legalReview = { status: "approved", approvedOn: "2026-11-19", by: "owner, as written" };
+export const legalReview = { status: "approved", approvedOn: "2026-11-24", by: "owner — as written 19 Nov; phone-call line added at owner request 24 Nov" };
 
 const ENTITY = site.legalEntity.value || "Grizzly Fitness";
 const UPDATED = "November 19, 2026";
+const PRIVACY_UPDATED = "November 24, 2026";
 const PHONE = site.phone.value.display;
 const EMAIL = site.email;
 const contact: LegalBlock[] = [
@@ -113,7 +114,7 @@ export const terms: LegalDoc = {
 
 export const privacy: LegalDoc = {
   title: "Privacy Policy",
-  updated: UPDATED,
+  updated: PRIVACY_UPDATED,
   intro: [
     { p: `This Privacy Policy explains how ${ENTITY} ("Grizzly Fitness," "we," "us") collects, uses and protects information when you use https://www.fitnessgrizzly.com (the "Site"), contact us, or submit a form or booking through it.` },
   ],
@@ -144,9 +145,10 @@ export const privacy: LegalDoc = {
       ],
     },
     {
-      h: "3. Text messages",
+      h: "3. Text messages and phone calls",
       blocks: [
         { p: "If you opt in to text messages, we use your mobile number to send the messages described in our Terms (section 5). You can stop at any time by replying STOP, or by contacting us. Reply HELP for help. Msg & data rates may apply; message frequency varies." },
+        { p: "If you agree on one of our forms to be contacted by phone, we may call the number you provide about your inquiry, appointments, membership and offers, including calls that are automated, pre-recorded or made using an AI voice. You can opt out of calls at any time by asking the caller to remove you from our list, replying STOP to a related text, or emailing " + EMAIL + " with the subject line \"Opt Out\"." },
         { p: "No mobile information will be shared with third parties/affiliates for marketing/promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties." },
       ],
     },
@@ -202,6 +204,7 @@ export const privacy: LegalDoc = {
         { ul: [
           "Unsubscribe from emails using the link in any email",
           "Stop text messages by replying STOP",
+          "Stop phone calls by asking the caller to remove you from our list, or by emailing us",
           "Ask us to access, correct or delete your information",
         ] },
         { p: "To make a request, contact us using the details below." },

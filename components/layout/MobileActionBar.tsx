@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { links, site } from "@/lib/data/site";
+import { site, startHref } from "@/lib/data/site";
 import { to } from "@/lib/paths";
 
 /** Sticky bottom bar on phones: appears once the hero has scrolled away. */
@@ -35,9 +35,15 @@ export default function MobileActionBar({ directions, join }: { directions?: { h
           Find a gym
         </a>
       )}
-      <a href={to(join ?? links.join.href)} target="_blank" rel="noopener noreferrer" className="grid place-items-center bg-lamp text-iron">
-        Join now<span className="sr-only"> (opens in a new tab)</span>
-      </a>
+      {join ? (
+        <a href={to(join)} target="_blank" rel="noopener noreferrer" className="grid place-items-center bg-lamp text-iron">
+          Join now<span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      ) : (
+        <a href={to(startHref)} className="grid place-items-center bg-lamp text-iron">
+          Join now
+        </a>
+      )}
     </nav>
   );
 }
