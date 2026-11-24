@@ -107,7 +107,7 @@ export const offer = {
 
 /**
  * GoHighLevel (Grizzly Fitness sub-account), wired 24 Nov 2026 from the owner's existing forms and calendars:
- *   - "A2P Compliant Opt-in — Grizzly Fitness" (name, phone, email, gym, service interest + unchecked SMS consent)
+ *   - "Grizzly Fitness | Website | Contact & PT" (website-only copy of the A2P Compliant Opt-in form, 24 Nov 2026: name, phone, email, gym, service interest + unchecked SMS consent)
  *     → the contact form on /contact and the "we'll reach out" form on /personal-training
  *   - "Grizzly Fitness — Free Tour Request" → the tour form on /join
  *   - "Grizzly Consultations" calendars, one per gym → the consult buttons on /personal-training
@@ -116,8 +116,8 @@ export const offer = {
  */
 const GHL = "https://link.apisystem.tech/widget";
 export const ghl = {
-  ptForm: { url: `${GHL}/form/1b3KY3ibUKk7f3v3Aofy`, title: "Personal training — get in touch", height: 980 },
-  contactForm: { url: `${GHL}/form/1b3KY3ibUKk7f3v3Aofy`, title: "Contact Grizzly Fitness", height: 980 },
+  ptForm: { url: `${GHL}/form/xzEKK8SkR4Xy8hAhmSiO`, title: "Personal training — get in touch", height: 980 },
+  contactForm: { url: `${GHL}/form/xzEKK8SkR4Xy8hAhmSiO`, title: "Contact Grizzly Fitness", height: 980 },
   tourForm: { url: `${GHL}/form/rdGijbWBXR8L4udtN2FS`, title: "Request a free tour", height: 900 },
   /** Booking pages of the per-gym consultation calendars (verified to load, 24 Nov 2026). */
   consult: {
