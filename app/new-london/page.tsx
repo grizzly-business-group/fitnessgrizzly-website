@@ -63,8 +63,8 @@ const remodelStats = [
 ];
 
 const remodel: { t: string; b: string; tag?: string }[] = [
-  { t: "Fresh paint", b: "New colors on every wall, top to bottom.", tag: "Confirmed" },
-  { t: "Rubber flooring", b: "Gym-grade rubber across the training floor.", tag: "Confirmed" },
+  { t: "Fresh paint", b: "New colors on every wall, top to bottom." },
+  { t: "Rubber flooring", b: "Gym-grade rubber across the training floor." },
   { t: "Leg day, loaded", b: "Hack squats, a pendulum squat, specialty squat machines, leg presses, plus rows of leg curls and calf raises." },
   { t: "Push & pull", b: "Plate-loaded and selectorized chest presses, rows, pulldowns and shoulder presses from Hammer Strength, Nautilus, Cybex, Magnum and more." },
   { t: "Free weights", b: "Power racks, half racks, a Smith machine, brand-new dumbbell racks, plenty of benches and rubber bumper plates." },
@@ -242,7 +242,7 @@ export default function NewLondonPage() {
               <li key={r.t}>
                 <span className="nl-mono">
                   {String(i + 1).padStart(2, "0")}
-                  {r.tag && <b className={`nl-chip ${r.tag === "Confirmed" ? "ok" : ""}`}>{r.tag}</b>}
+                  {r.tag && <b className="nl-chip">{r.tag}</b>}
                 </span>
                 <h3 className="nl-orb">{r.t}</h3>
                 <p>{r.b}</p>
