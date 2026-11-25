@@ -7,23 +7,26 @@ import GhlEmbed from "@/components/page/GhlEmbed";
 import Countdown from "@/components/newlondon/Countdown";
 import { ghl, newLondon, site } from "@/lib/data/site";
 import { to } from "@/lib/paths";
+import { networkRating } from "@/lib/data/locations";
+import { testimonials } from "@/lib/data/content";
 import "./nl.css";
 
-import rackRow from "@/public/media/new-london/nl-rack-row.jpg";
-import mainFloor from "@/public/media/new-london/nl-main-floor.jpg";
-import cardio from "@/public/media/new-london/nl-cardio-windows.jpg";
-import cables from "@/public/media/new-london/nl-cable-crossover.jpg";
-import turfDumbbells from "@/public/media/new-london/nl-turf-dumbbells.jpg";
-import lobby from "@/public/media/new-london/nl-lobby-shop.jpg";
-import cubbies from "@/public/media/new-london/nl-cubbies-lounge.jpg";
+import hero from "@/public/media/new-london/nl-real-main-floor-wide.jpg";
+import entrance from "@/public/media/new-london/nl-real-entrance.jpg";
+import mainFloor from "@/public/media/new-london/nl-real-main-floor.jpg";
+import entranceWindows from "@/public/media/new-london/nl-real-entrance-windows.jpg";
+import sideRoom from "@/public/media/new-london/nl-real-side-room.jpg";
+import streetWindows from "@/public/media/new-london/nl-real-street-windows.jpg";
 
 /**
  * /new-london — Grizzly Fitness New London, coming soon. "Mission Control" design (owner pick, 24 Nov 2026):
  * intentionally unlike the rest of the site. Styles live in ./nl.css, scoped under .nl. Two extra self-hosted
  * fonts (SIL OFL) are loaded on this page only: Orbitron 900 (headlines) and JetBrains Mono 500 (UI labels).
  *
- * PHOTOS: every image is an owner-supplied concept mockup, NOT a photo of the gym — labelled on the page and on
- * every image. Owner-approved exception to the no-AI/stock rule, for this page only. Swap for real photos later.
+ * PHOTOS (owner, 25 Nov 2026): real photos of the building at 210 Wisconsin St. as it stands before the remodel,
+ * edited for exposure, colour and sharpness only (realtor sign cropped out). The earlier AI concept mockups were
+ * retired so the page never promises a look the gym won't have; they're kept, unserved, in media-held/new-london-mockups.
+ * Remodel list ("What's coming") = owner-confirmed only: fresh paint, rubber flooring, turf, lots of strength and cardio.
  * Founders list: GHL form `ghl.newLondonForm`. Offer phases + presale countdown: `newLondon.founders` (lib/data/site.ts).
  */
 const orb = localFont({ src: "../fonts/Orbitron-900.woff2", weight: "900", variable: "--font-nl-orb", display: "swap" });
@@ -39,12 +42,42 @@ export const metadata: Metadata = withShare({
 const crumbs = [{ name: "Locations", path: "/locations" }, { name: "New London", path: "/new-london" }];
 
 const gallery: { src: StaticImageData; alt: string; caption: string; wide?: boolean }[] = [
-  { src: mainFloor, alt: "Concept mockup of a main floor with rows of treadmills along the windows and strength machines and racks across a dark rubber floor", caption: "Main floor" },
-  { src: cardio, alt: "Concept mockup of a row of treadmills and stair climbers facing big windows, with the front desk on the left", caption: "Cardio" },
-  { src: cables, alt: "Concept mockup of two cable crossover stations in front of mirrored dumbbell racks and benches", caption: "Cables & dumbbells" },
-  { src: turfDumbbells, alt: "Concept mockup of a turf lane with a sled beside a dumbbell area and a functional trainer", caption: "Turf & functional" },
-  { src: lobby, alt: "Concept mockup of a lobby with wood-trimmed entry doors, a lit front desk and an apparel display", caption: "Lobby" },
-  { src: cubbies, alt: "Concept mockup of a lounge with cubbies, coat hooks, benches and leather chairs against a dark wall", caption: "Cubbies & lounge", wide: true },
+  { src: mainFloor, alt: "The empty main floor at 210 Wisconsin St. before the remodel: open carpeted space, drop ceiling with LED panels and two support columns", caption: "The main floor" },
+  { src: entrance, alt: "The front entrance before the remodel: glass doors framed in cedar with built-in benches, a lobby area and a large street-side window", caption: "The front entrance" },
+  { src: entranceWindows, alt: "The entry corner with cedar posts, wood-look flooring and tall windows, next to a raised ledge along the street-side windows", caption: "Entry & windows" },
+  { src: sideRoom, alt: "A separate side room before the remodel with grey-green walls, carpet and an open doorway to the main floor", caption: "The side room" },
+  { src: streetWindows, alt: "Big street-facing windows above a long raised ledge, letting daylight into the open floor", caption: "Street-side windows" },
+];
+
+/*
+ * "What's coming" (owner, 25 Nov 2026). Confirmed: fresh paint, rubber flooring. Equipment from the owner's
+ * New London Equipment Plan (not final — e.g. the G7 circuit is no longer coming), so the page uses rounded
+ * "around" figures and categories, never promises a specific machine. Turf is planned after opening, not day one.
+ * Counted from the plan (New London rows only, excluding undecided + G7): ~100 strength pieces, 19 cardio, 20+ brands.
+ */
+const remodelStats = [
+  { v: "~100", l: "Strength machines" },
+  { v: "~20", l: "Cardio machines" },
+  { v: "20+", l: "Equipment brands" },
+  { v: "24/7", l: "Key-fob access" },
+];
+
+const remodel: { t: string; b: string; tag?: string }[] = [
+  { t: "Fresh paint", b: "New colors on every wall, top to bottom.", tag: "Confirmed" },
+  { t: "Rubber flooring", b: "Gym-grade rubber across the training floor.", tag: "Confirmed" },
+  { t: "Leg day, loaded", b: "Hack squats, a pendulum squat, specialty squat machines, leg presses, plus rows of leg curls and calf raises." },
+  { t: "Push & pull", b: "Plate-loaded and selectorized chest presses, rows, pulldowns and shoulder presses from Hammer Strength, Nautilus, Cybex, Magnum and more." },
+  { t: "Free weights", b: "Power racks, half racks, a Smith machine, brand-new dumbbell racks, plenty of benches and rubber bumper plates." },
+  { t: "Cardio", b: "Treadmills, ellipticals, ClimbMills and bikes — about 20 cardio machines." },
+  { t: "Old-school classics", b: "A few rare, vintage machines you won't find at a big-box gym." },
+  { t: "Turf", b: "A turf area for sleds, carries and conditioning is planned after opening.", tag: "After opening" },
+];
+
+/* Three member reviews already used on the site (lib/data/content.ts). Wautoma's is shown in full. */
+const reviews = [
+  testimonials[0],
+  { quote: "I have been working out at Grizzly Fitness for over a year now. Absolutely love it! My wife also enjoys the silver sneakers class in the mornings. This is a great place to be able to go to stay in shape. Just what Wautoma needed!", name: "Clarence Lont", context: "Wautoma" },
+  testimonials[2],
 ];
 
 const tierCopy: Record<string, { tier: string; tag: string; bar: string; bullets: string[] }> = {
@@ -60,7 +93,7 @@ export default function NewLondonPage() {
   const closed = f.phase === "closed";
   const ticker = closed
     ? ["Coming soon", "New London", "24/7 key-fob access", "210 Wisconsin St"]
-    : ["/// Founders list open", "$1 a day for a year", "/// 24/7 key-fob access", `Presale · list only · ${f.presaleDate}`, "/// 210 Wisconsin St"];
+    : ["/// Founders list open", "$1 a day for a year", "/// Around 100 strength machines", "24/7 key-fob access", `Presale · list only · ${f.presaleDate}`, "/// 210 Wisconsin St"];
   const tierCta = claimOpen ? "Claim founders pricing" : "Get first access";
   const tierHref = claimOpen ? f.href : to("#founders");
 
@@ -81,13 +114,13 @@ export default function NewLondonPage() {
             </nav>
             <div className="nl-frame">
               <div className="nl-img">
-                <Image src={rackRow} alt="Concept mockup of a row of black squat racks and benches in front of lit mirrors" fill preload fetchPriority="high" sizes="(min-width:1400px) 1360px, 100vw" quality={78} placeholder="blur" />
+                <Image src={hero} alt="The open main floor at 210 Wisconsin St. in New London before the remodel, with two dark support columns and a long back wall" fill preload fetchPriority="high" sizes="(min-width:1400px) 1360px, 100vw" quality={78} placeholder="blur" />
               </div>
               <i aria-hidden className="nl-br tl" />
               <i aria-hidden className="nl-br tr" />
               <i aria-hidden className="nl-br bl" />
               <i aria-hidden className="nl-br brr" />
-              <span className="nl-mono nl-mock"><i aria-hidden className="nl-dot" />Concept mockup</span>
+              <span className="nl-mono nl-mock"><i aria-hidden className="nl-dot" />Real photo · Before the remodel</span>
               <div className="nl-hcopy">
                 <p className="nl-mono nl-tag"><i aria-hidden className="nl-dot" />Location 06 · {closed ? "Coming soon" : "Founders list open"}</p>
                 <h1 id="page-title" className="nl-orb nl-h1">
@@ -95,7 +128,8 @@ export default function NewLondonPage() {
                 </h1>
                 <p className="nl-sub">
                   A new 24/7 Grizzly Fitness is coming to {newLondon.address.street} in New London.{" "}
-                  {closed ? "Get on the list for opening-day news." : "Founders get our lowest rates — and the founders list gets in first."}
+                  We&rsquo;re remodeling this space top to bottom to make it the best it can be.{" "}
+                  {closed ? "Get on the list for opening-day news." : "Founders get our lowest rates, and the founders list gets in first."}
                 </p>
                 <div className="nl-cta">
                   <a className="nl-btn" href={to("#founders")}>{closed ? "Get opening updates ▸" : "Join the founders list ▸"}</a>
@@ -111,7 +145,7 @@ export default function NewLondonPage() {
                 )}
                 <div className="nl-row"><span>Address</span><span className="v">{newLondon.address.street}</span></div>
                 <div className="nl-row"><span>Access</span><span className="v">24/7 key fob</span></div>
-                <div className="nl-row"><span>Status</span><span className="v" style={{ color: "var(--nl-red)" }}>Build in progress</span></div>
+                <div className="nl-row"><span>Status</span><span className="v" style={{ color: "var(--nl-red)" }}>Remodel underway</span></div>
               </div>
             </div>
           </div>
@@ -167,23 +201,99 @@ export default function NewLondonPage() {
           </section>
         )}
 
-        {/* GALLERY */}
-        <section aria-labelledby="build-title" className="nl-wrap nl-sec">
+        {/* DAY 0 — real photos */}
+        <section aria-labelledby="space-title" className="nl-wrap nl-sec">
           <div className="nl-sh">
             <div>
-              <p className="nl-mono">{"// 02 — Facility renders"}</p>
-              <h2 id="build-title" className="nl-orb nl-h2">The build</h2>
+              <p className="nl-mono">{"// 02 — Day 0"}</p>
+              <h2 id="space-title" className="nl-orb nl-h2">The space.<br />Today.</h2>
             </div>
             <p className="nl-mono">
-              <strong style={{ color: "var(--nl-txt)" }}>These are mockups, not photos.</strong> Not exact or to scale — equipment and finishes will differ — but this is the idea we&rsquo;re going with. Real photos once the doors open.
+              <strong style={{ color: "var(--nl-txt)" }}>Real photos, no renders.</strong> This is 210 Wisconsin St. before we touch it: big, bright and wide open. Watch it turn into a gym.
             </p>
           </div>
           <ul className="nl-gal">
             {gallery.map((g, i) => (
               <li key={g.caption} className="nl-g" style={g.wide ? { gridColumn: "1 / -1" } : undefined}>
                 <Image src={g.src} alt={g.alt} fill sizes={i === 0 ? "(min-width:900px) 50vw, 100vw" : "(min-width:900px) 25vw, 50vw"} quality={72} placeholder="blur" />
-                <span className="nl-mono lab"><i aria-hidden className="nl-dot" />Mockup</span>
+                <span className="nl-mono lab"><i aria-hidden className="nl-dot" />Real photo</span>
                 <span className="nl-mono cap">{g.caption}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* THE REMODEL */}
+        <section aria-labelledby="remodel-title" className="nl-wrap nl-sec">
+          <div className="nl-sh">
+            <div>
+              <p className="nl-mono">{"// 03 — The remodel"}</p>
+              <h2 id="remodel-title" className="nl-orb nl-h2">What&rsquo;s<br />coming</h2>
+            </div>
+            <p className="nl-mono">We&rsquo;re putting serious work into this building so it&rsquo;s the best it can be the day the doors open.</p>
+          </div>
+          <dl className="nl-stats nl-stats-row">
+            {remodelStats.map((x) => (
+              <div key={x.l}><dt className="nl-mono">{x.l}</dt><dd className="nl-orb">{x.v}</dd></div>
+            ))}
+          </dl>
+          <ul className="nl-feat">
+            {remodel.map((r, i) => (
+              <li key={r.t}>
+                <span className="nl-mono">
+                  {String(i + 1).padStart(2, "0")}
+                  {r.tag && <b className={`nl-chip ${r.tag === "Confirmed" ? "ok" : ""}`}>{r.tag}</b>}
+                </span>
+                <h3 className="nl-orb">{r.t}</h3>
+                <p>{r.b}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="nl-mono" style={{ marginTop: 16, textTransform: "none", letterSpacing: "0.02em" }}>
+            The equipment list is still being finalized, so exact machines and counts may change before we open.
+          </p>
+        </section>
+
+        {/* WHO WE ARE */}
+        <section aria-labelledby="story-title" className="nl-wrap nl-sec">
+          <div className="nl-story">
+            <div>
+              <p className="nl-mono">{"// 04 — Who we are"}</p>
+              <h2 id="story-title" className="nl-orb nl-h2">Built in<br />small towns</h2>
+              <p className="nl-sub">
+                Grizzly Fitness started in 2017 as a small personal gym in Princeton, Wisconsin: about 400 square feet and a handful of equipment. Today we run five 24/7 gyms in Princeton, Berlin, Wautoma, Omro and Rosendale, built for the small towns the big chains overlook.
+              </p>
+              <p className="nl-sub">
+                Old-school feel. A welcome for first-timers and serious lifters alike. New London is next.
+              </p>
+              <p className="nl-mono nl-tagline">&ldquo;We operate in small towns, but Grizzly Fitness is for Big Dreamers.&rdquo;</p>
+            </div>
+            <dl className="nl-stats">
+              <div><dt className="nl-mono">Gyms</dt><dd className="nl-orb">5</dd></div>
+              <div><dt className="nl-mono">Since</dt><dd className="nl-orb">2017</dd></div>
+              <div><dt className="nl-mono">On Google, {networkRating.count} reviews</dt><dd className="nl-orb">{networkRating.rating.toFixed(1)}&#9733;</dd></div>
+              <div><dt className="nl-mono">Access</dt><dd className="nl-orb">24/7</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        {/* REVIEWS */}
+        <section aria-labelledby="reviews-title" className="nl-wrap nl-sec">
+          <div className="nl-sh">
+            <div>
+              <p className="nl-mono">{"// 05 — Member reviews"}</p>
+              <h2 id="reviews-title" className="nl-orb nl-h2">Don&rsquo;t take<br />our word for it</h2>
+            </div>
+            <p className="nl-mono">{networkRating.rating.toFixed(1)}&#9733; on Google from {networkRating.count} reviews across our five gyms.</p>
+          </div>
+          <ul className="nl-reviews">
+            {reviews.map((r) => (
+              <li key={r.name}>
+                <figure>
+                  <p aria-hidden className="nl-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                  <blockquote>&ldquo;{r.quote}&rdquo;</blockquote>
+                  <figcaption className="nl-mono">{r.name} · {r.context === "Member" ? "Grizzly member" : `Grizzly ${r.context}`}</figcaption>
+                </figure>
               </li>
             ))}
           </ul>
@@ -193,7 +303,7 @@ export default function NewLondonPage() {
         <section id="founders" aria-labelledby="founders-title" className="nl-wrap">
           <div className="nl-enlist">
             <div>
-              <p className="nl-mono">{"// 03 — Enlist"}</p>
+              <p className="nl-mono">{"// 06 — Enlist"}</p>
               <h2 id="founders-title" className="nl-orb nl-h2">{closed ? <>Get opening<br />updates</> : <>Join the<br />founders list</>}</h2>
               {claimOpen && (
                 <div style={{ marginTop: 22 }}>
