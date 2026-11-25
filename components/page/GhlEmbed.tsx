@@ -24,7 +24,6 @@ export default function GhlEmbed({ embed, fallback, className = "" }: { embed: {
         data-height={embed.height}
         data-layout-iframe-id={`inline-${id}`}
         data-form-id={id}
-        loading="lazy"
         style={{ width: "100%", height: embed.height, border: "none", borderRadius: 3, background: "#fff" }}
       />
       <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
