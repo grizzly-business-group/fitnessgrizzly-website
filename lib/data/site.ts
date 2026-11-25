@@ -137,7 +137,7 @@ export const ghl = {
  * FOUNDERS OFFER (from Gavino, approved by the owner 24 Nov 2026). Every plan is + the usual $20 sign-up fee.
  * Founders pricing ends 7 days after opening day. `founders.phase` drives the page:
  *   "list"   — offers shown; the call to action is the founders list (first access)          ← now
- *   "early"  — list-only presale is open: page says "join now and we'll text you the link"
+ *   "early"  — list-only presale is open: page says "join now and we'll email you the link"
  *   "open"   — public founders sale: "Claim your founders membership" → founders.href (GymMaster link with the offer)
  *   "closed" — founders pricing has ended: offers hidden, form becomes "opening updates"
  * `was` is only shown where it's a real regular price (1 year $429, bi-weekly $20 — GymMaster, 23 Nov 2026; 6 months $229).

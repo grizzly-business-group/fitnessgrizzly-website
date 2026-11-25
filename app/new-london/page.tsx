@@ -314,7 +314,7 @@ export default function NewLondonPage() {
               {!closed && !claimOpen && (
                 <div className="nl-steps" style={{ marginTop: 24 }}>
                   <div><b>01</b><span>Enter your info. 30 seconds, no payment, no commitment.</span></div>
-                  <div><b>02</b><span>{f.phase === "early" ? "We text you the presale link right away." : `${f.presaleDate}, we text you the presale link — before it goes public.`}</span></div>
+                  <div><b>02</b><span>{f.phase === "early" ? "We email you the presale link right away." : `${f.presaleDate}, we email you the presale link — before it goes public.`}</span></div>
                   <div><b>03</b><span>Lock in your founders rate. {f.deadline}.</span></div>
                 </div>
               )}
